@@ -30,11 +30,11 @@
 
 
   The class path can be set in multiple ways:
-  ~ `java -cp myApp.jar:lib/* com.example.Main` from the command line.
-  ~ Environment Variable
+  - `java -cp myApp.jar:lib/* com.example.Main` from the command line.
+  - Environment Variable
     @code bash
     export CLASSPATH=/path/to/myApp.jar:/path/to/lib/*
     java com.example.Main
     @end
-  ~ Manifest File in a JAR %FIXME: needs fix for the ordered list%
+  - Manifest File in a JAR
 
