@@ -1,0 +1,14 @@
+* Internet
+
+** Tokens
+   - Stateless
+   - Signed and Encrypted
+   - Used in APIs and microservices
+** Cookies
+   - Stateful (stored locally)
+   - Can be stolen
+   - Browser-based auth
+** Server-Side Session
+   - Stateful (stored remotely on server)
+   - Secure but server load increases
+   - Traditional web apps
