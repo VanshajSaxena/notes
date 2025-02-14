@@ -5,5 +5,6 @@
   "Spring" means different things in different contexts. The framework is divided into modules. Spring embraces flexibility and is *not opinionated* about how things should be done. Follows the following [Design Philosophy]{https://docs.spring.io/spring-framework/reference/overview.html#overview-philosophy}.
 
 ** Core Technologies
+
    ~ Spring Framework's [Inversion of Control (IoC) Container]{:$/spring-framework/inversion-of-control:* Inversion of Control}.
    ~ Spring's [Aspect-Oriented Programming (AOP)]{:$/spring-framework/aspect-oriented-programming:* Aspect Oriented Programming}: Spring has its own AOP framework.

@@ -8,7 +8,6 @@
   ~ Advice: The actual *action* take when the Point Cut matches a Joint Point.
   ~ Weaving: The process of applying aspects to the target classes.
 
-
   @code java
   @Aspect class LoggingAspect {}
   @end
