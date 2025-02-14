@@ -1,6 +1,6 @@
 * Cryptography
 
-  *Cryptography* is the science of secure of secure communication. Its key ideas:
+  *Cryptography* is the science of secure communication. Its key ideas:
 
   - Confidentiality: Only authorized parties can read the data.
   - Integrity: Data is not altered during transmission.
