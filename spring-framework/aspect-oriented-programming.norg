@@ -1,5 +1,4 @@
 * Aspect Oriented Programming
-
   Aspect Oriented Programming (AOP) is a programming paradigm that enables developers to separate cross-cutting concerns from the business logic.
 
   ~ Aspect: A module that encapsulates a concern.
@@ -13,7 +12,6 @@
   @end
 
 * RESTful APIs
-
   For an API to be considered RESTful, it must adhere to 6 architectural constraints:
 
   ~ Client-Server Architectural: The API must separate the client and the server from each other. Allowing independent evolution of both.
@@ -24,16 +22,15 @@
   ~ Code on Demand: The server can send executable code the client. Rarely used.
 
 * Java Class Path System
-
   Java loads classes from all the JARs or directories listed in the CLASSPATH environment variable, without knowing the logical relationship between them. It is essentially a `:` separated list of directories and JAR files.
 
 
   The class path can be set in multiple ways:
   - `java -cp myApp.jar:lib/* com.example.Main` from the command line.
   - Environment Variable
-    @code bash
-    export CLASSPATH=/path/to/myApp.jar:/path/to/lib/*
-    java com.example.Main
-    @end
+  @code bash
+  export CLASSPATH=/path/to/myApp.jar:/path/to/lib/*
+  java com.example.Main
+  @end
   - Manifest File in a JAR
 

@@ -1,65 +1,50 @@
 * Computer Networking
 
 ** Networking
-
    A network is simply a collection of computers, devices, and other resources connected together to exchange data.
 
 ** Data Communication
-
    Data Communication is the process of transmission of data between devices.
 
 *** Analogue vs Digital Signals
-
     Data can be transmitted through electrical signals that are either analog (continuous) or digital (discrete). Most modern networks use digital signals.
 
 *** Bandwidth
-
     Bandwidth refers to the capacity of a communication channel. The higher the bandwidth, larger the amount of data can be transmitted in the same time.
 
 ** Networking Protocols
-
    Protocols are a set of rules that govern how devices communicate over a network. These rules ensure that data is transmitted, received, and processed correctly between devices. Some key protocols are:
 
 *** TCP/IP (Transmission Control Protocol/Internet Protocol)
-
     The foundation of the internet. It is a suite of protocols that enable communication between devices over the internet. TCP ensures that data is transmitted reliably, while IP is responsible for addressing and routing.
 
 *** UDP (User Datagram Protocol)
-
     A simpler, connectionless protocol that does not guarantee delivery of data. It is used for applications where speed is more important than reliability.
 
 *** HTTP (Hypertext Transfer Protocol)
-
     The protocol used for transmitting web pages over the internet. It is the foundation of any data exchange on the Web.
 
 *** FTP (File Transfer Protocol)
-
     A protocol used for transferring files between a client and a server on a computer network.
 
 ** Routing and Switching
 
 *** Router
-
     A router connects different networks (like a home network to the internet) and directs data along the best available path. Routers use tables of IP addresses to figure out where data should go.
 
 *** Switch
-
     A switch connects devices within a single network and forwards data only to the device it is intended for, based on MAC (Media Access Control) addresses.
 
 *** Subnetting
-
     Subnetting involves breaking down large networks into smaller, manageable sub-networks, helping to optimize performance and security.
 
 ** Network security
 
 *** Firewalls
-
     Firewalls control the incoming and outgoing traffic between a network and the internet, based on predefined security rules.
 
 *** Encryptions [(see Cryptography)]{:$/programming-concepts/cryptography/cryptography-index:}
-
     Encryption is the process of converting data into a secure format that can only be decrypted with the correct key. It ensures privacy and security for data in transit.
 
 *** VPN (Virtual Private Network)
-
     A VPN allows users to connect to a network securely over the internet by creating a private, encrypted tunnel.

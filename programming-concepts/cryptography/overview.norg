@@ -1,5 +1,4 @@
 * Cryptography
-
   *Cryptography* is the science of secure communication. Its key ideas:
 
   - Confidentiality: Only authorized parties can read the data.
@@ -8,18 +7,15 @@
   - Non-repudiation: A sender cannot deny sending a message.
 
 ** Classical Cryptography
-
    Manual techniques of cryptography, which were used before the advent of computers. These include:
    - Substitution Ciphers
    - Transposition Ciphers
      These methods are now only of historical interest, these are not relevant today as these are easily broken.
 
 ** Modern Cryptography
-
    Modern cryptography leverages complex mathematical algorithms and computer power: Some notable types are:
 
 *** Symmetric-Key Cryptography (Secret-Key Cryptography)
-
     The same key is used for encryption and decryption. Notable subtypes:
 
     - Block Ciphers: Encrypt data in fixed-size blocks. E.g. AES, DES.
@@ -28,16 +24,13 @@
     Key Challenge: Secure key distribution (both parties need the same secret key).
 
 *** Asymmetric-Key Cryptography (Public-Key Cryptography)
-
     Uses a pair of keys - a public key (which anyone can know) and a private key (kept secret). Data encrypted with one key can only be decrypted with the other. Subtypes/Examples:
 
 **** Encryption Algorithms:
-
      - RSA (Rivest, Shamir, Adleman): Based on the difficulty of factoring large numbers.
      - Elliptic Curve Cryptography (ECC): Based on the mathematics of elliptic curves.
 
 **** Key Exchange Protocols:
-
      - Diffie-Hellman Key Exchange: Allows two parties to securely agree on a shared secret over an insecure channel.
 
      ---
@@ -48,7 +41,6 @@
     Typically slower than symmetric encryption, which is why many systems use hybrid encryption (using asymmetric methods to securely exchange a symmetric key, then encrypting the bulk data with the symmetric cipher).
 
 *** Cryptographic Hash Functions
-
     A hash function takes an input (or "message") and returns a fixed-size string of bytes. The process is one-way - computing the hash is easy, but reversing it is computationally infeasible. Key properties:
 
     - Deterministic: The same input always produces the same hash.
@@ -59,11 +51,9 @@
     Applications: Data integrity checks, password storage, digital signatures, and blockchain.
 
 *** Digital Signatures
-
     Digital signatures use asymmetric cryptography to provide a means of verifying the *authenticity* and *integrity* of a message, similar to a handwritten signature.
 
 **** How it works
-
      ~ Hashing: The original message is hashed to create a digest.
      ~ Signing: The digest is encrypted with the sender's private key to produce the signature.
      ~ Verification: The recipient decrypts the signature using the sender's public key and compares the resulting digest with a newly computed hash of the received message.
@@ -73,13 +63,10 @@
     Examples: RSA Signatures, DSA (Digital Signature Algorithm), ECDSA (Elliptic Curve Digital Signature Algorithm).
     Applications: Secure communications, software distribution, and legal contracts.
 
-
 *** Message Authentication Codecs (MACs)
-
     A MAC is a short piece of information used to authenticate a message and ensure its integrity, using a secret key.
 
 **** Difference from Digital Signatures
-
      MACs use symmetric keys and require both parties to share the same secret key, whereas digital signatures use asymmetric keys.
 
      ---
