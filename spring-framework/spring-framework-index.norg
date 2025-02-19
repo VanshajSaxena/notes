@@ -1,7 +1,10 @@
 * Spring Framework
   A framework that makes it easy to create Java enterprise applications.
 
-  "Spring" means different things in different contexts. The framework is divided into modules. Spring embraces flexibility and is *not opinionated* about how things should be done. Follows the following [Design Philosophy]{https://docs.spring.io/spring-framework/reference/overview.html#overview-philosophy}.
+  /"Spring"/ means different things in different contexts. The framework is
+  divided into modules. Spring embraces flexibility and is *not opinionated*
+  about how things should be done. Follows this [Design
+  Philosophy]{https://docs.spring.io/spring-framework/reference/overview.html#overview-philosophy}.
 
 ** Core Technologies
 

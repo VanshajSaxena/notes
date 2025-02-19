@@ -1,62 +1,101 @@
 * Inversion of Control
 
 ** [Basics]{https://docs.spring.io/spring-framework/reference/core/beans/introduction.html}
-   - In Spring, the objects that form the backbone of the application and managed by the IoC container are called Beans.
-   - A Bean is an object that is instantiated, assembled, and managed by a Spring IoC Container.
+   - In Spring, the objects that form the backbone of the application and
+     managed by the IoC container are called Beans.
+   - A Bean is an object that is instantiated, assembled, and managed by a
+     Spring IoC Container.
 
 ** Container Overview
-   - The `org.springframework.context.ApplicationContext` interface represents the Spring IoC container.
-   - It instantiates, configures, and assembles beans by reading configuration metadata from XML, Java annotations, or Java code.
-   - The `ApplicationContext` is the interface for an advanced factory capable of maintaining a registry of different beans and their dependencies.
-   - It is possible to bootstrap beans from different types of configuration metadata, such as XML or Groovy. The most flexible variant is `GenericApplicationContext` in combination with reader delegates.
+   - The `org.springframework.context.ApplicationContext` interface represents
+     the Spring IoC container.
+   - It instantiates, configures, and assembles beans by reading configuration
+     metadata from XML, Java annotations, or Java code.
+   - The `ApplicationContext` is the interface for an advanced factory capable
+     of maintaining a registry of different beans and their dependencies.
+   - It is possible to bootstrap beans from different types of configuration
+     metadata, such as XML or Groovy. The most flexible variant is
+     `GenericApplicationContext` in combination with reader delegates.
    @code Java
    GenericApplicationContext context = new GenericApplicationContext();
    new XmlBeanDefinitionReader(context).loadBeanDefinitions("services.xml", "daos.xml");
    context.refresh();
    @end
-   - It is possible to mix and match different reader delegates on the same `ApplicationContext`, for example, loading some beans from an XML file and others from an annotated class.
+   - It is possible to mix and match different reader delegates on the same
+     `ApplicationContext`, for example, loading some beans from an XML file and
+     others from an annotated class.
 
 ** Bean Overview
-   Within the IoC container, the beans are represented as `BeanDefinition` objects, which contain metadata about the bean and its dependencies. These include:
+   Within the IoC container, the beans are represented as `BeanDefinition`
+   objects, which contain metadata about the bean and its dependencies. These
+   include:
 
    - Package Qualified Class Name: The class of the bean.
-   - Bean Behavioral Configuration: The configuration metadata that represents the bean's behavior in the container (scope, lifecycle callbacks).
-   - References to other beans: These references are also called collaborators or dependencies.
-   - Other Configuration settings to set in the newly created object, e.g. the size limit of the pool or the number of connections to use in a bean that manages a connection pool.
+   - Bean Behavioral Configuration: The configuration metadata that represents
+     the bean's behavior in the container (scope, lifecycle callbacks).
+   - References to other beans: These references are also called collaborators
+     or dependencies.
+   - Other Configuration settings to set in the newly created object, e.g. the
+     size limit of the pool or the number of connections to use in a bean that
+     manages a connection pool.
 
-   It is also possible to register existing objects that are created outside the container as beans. This is done by ApplicationContext's `BeanFactory` through the `getBeanFactory()` method, which returns `DefaultListableBeanFactory` implementation.
-   `DefaultListableBeanFactory` supports this registration through the `registerSingleton(..)` and `registerBeanDefinition(..)` methods.
+   It is also possible to register existing objects that are created outside
+   the container as beans. This is done by ApplicationContext's `BeanFactory`
+   through the `getBeanFactory()` method, which returns
+   `DefaultListableBeanFactory` implementation. `DefaultListableBeanFactory`
+   supports this registration through the `registerSingleton(..)` and
+   `registerBeanDefinition(..)` methods.
 
 *** Bean Overriding
-    - Bean overriding occurs when a bean is registered using an identifier that is already allocated. It makes configuration harder to read.
+    - Bean overriding occurs when a bean is registered using an identifier that
+      is already allocated. It makes configuration harder to read.
     - *Bean overriding will be deprecated in future releases.*
     - There is explicit support of Bean overriding in Spring Framework 6.2.
 
 *** Naming Beans
-    - Every bean has one or more identifier. These identifiers must be unique within the container that hosts the bean.
-    - To introduce aliases to a bean, specify them in the name attribute, separated by a comma (`,`), semicolon (`;`), or white space.
-    - If a name or id attribute is not specified explicitly, the container generates a unique name for that bean.
-    - If Java annotation is used to provide configuration, the `@Bean` annotation can be used to provide aliases.
+    - Every bean has one or more identifier. These identifiers must be unique
+      within the container that hosts the bean.
+    - To introduce aliases to a bean, specify them in the name attribute,
+      separated by a comma (`,`), semicolon (`;`), or white space.
+    - If a name or id attribute is not specified explicitly, the container
+      generates a unique name for that bean.
+    - If Java annotation is used to provide configuration, the `@Bean`
+      annotation can be used to provide aliases.
 
 *** Determining a Bean's Runtime Type
-    The runtime type of a specified bean is non-tirvial to determine. The recommeded way to find the runtime type of a Bean is to use the `BeanFactory.getType` call for the specified bean name. This returns the type of the object that a `BeanFactory.getBean` call will return for the same bean name.
+    The runtime type of a specified bean is non-tirvial to determine. The
+    recommeded way to find the runtime type of a Bean is to use the
+    `BeanFactory.getType` call for the specified bean name. This returns the
+    type of the object that a `BeanFactory.getBean` call will return for the
+    same bean name.
 
 *** Bean Scopes
-    The Spring Framework supports six scopes, four of which are available only if you use a web-aware `ApplicationContext`. Scopes allow you to control the *lifecycle and visibility* of the beans.
-    ~ singleton: Only single instance is created per IoC container. This is the default scope.
-    ~ prototype: A new instance is created each time a bean is requested. Spring does not manage the complete lifestyle of a prototype bean. The client code must clean up prototype-scope objects.
+    The Spring Framework supports six scopes, four of which are available only
+    if you use a web-aware `ApplicationContext`. Scopes allow you to control
+    the *lifecycle and visibility* of the beans.
+
+    ~ singleton: Only single instance is created per IoC container. This is
+      the default scope.
+    ~ prototype: A new instance is created each time a bean is requested.
+      Spring does not manage the complete lifestyle of a prototype bean. The
+      client code must clean up prototype-scope objects.
     ~ request(web): A new bean is created for each HTTP request.
     ~ session(web): A new bean is created per HTTP session.
-    ~ application(web): A single bean is created per `ServeletContext` (shared across the entire application).
+    ~ application(web): A single bean is created per `ServeletContext` (shared
+      across the entire application).
     ~ websocket(web): A new bean is created per WebSocket session.
 
     You can also create custom scopes. A Scope is defined as `@Scope("scope")`.
 
 ** Dependencies
-   In Spring, the Beans that works with other Beans, or are dependencies of each other are also known as collaborators.
+   In Spring, the Beans that works with other Beans, or are dependencies of
+   each other are also known as collaborators.
 
 *** Dependency Injection
-    Dependency Injection (DI) is the process where the objects define their dependencies (or collaborators) only through constructor arguments, arguments to factory methods, or properties that are set on the object instance after it is constructed or returned from the factory method.
+    Dependency Injection (DI) is the process where the objects define their
+    dependencies (or collaborators) only through constructor arguments,
+    arguments to factory methods, or properties that are set on the object
+    instance after it is constructed or returned from the factory method.
 
     @code java
     public class Service {
@@ -116,7 +155,8 @@
     <bean id="yetAnotherBean" class="examples.YetAnotherBean"/>
     @end
 
-    - We can also use an instance (non-static) factory method using `factory-bean` attribute instead of the `class` attribute, like this:
+    - We can also use an instance (non-static) factory method using
+      `factory-bean` attribute instead of the `class` attribute, like this:
     @code xml
     <!-- this is same as the previous example, just the class attribute is changed to factory-bean -->
     <bean id="exampleBean" factory-bean="examples.ExampleBean" factory-method="createInstance">
@@ -132,8 +172,13 @@
 ** [Annotation-based Container Configuration]{https://docs.spring.io/spring-framework/reference/core/beans/annotation-config.html}
 
 *** Using @Autowired
-    *Note on Self Injection*: It is possible to use @Autowire for self injection (references back to the bean that is currently injected). It has the lowest priority and should only be used as a last resort.
+    *Note on Self Injection*: It is possible to use @Autowire for self
+    injection (references back to the bean that is currently injected). It has
+    the lowest priority and should only be used as a last resort.
 
 ** Classpath Scanning and Managed Components
-   Spring provides a way to implicitly define the candidate components by scanning the classpath, in contrast to explicitly declaring them as beans in the configuration metadata using XML. This eliminates the need to use XML to perform bean registration.
+   Spring provides a way to implicitly define the candidate components by
+   scanning the classpath, in contrast to explicitly declaring them as beans in
+   the configuration metadata using XML. This eliminates the need to use XML to
+   perform bean registration.
 

@@ -1,5 +1,8 @@
 * Annotations
-  Annotations are *metadata* that provide additional information about the code without affection its execution directly. These are *special interface* types that are processed at compile-time or runtime by the JVM.
+  Annotations are *metadata* that provide additional information about the code
+  without affection its execution directly. These are *special interface* types
+  that are processed at compile-time or runtime by the JVM.
+
   @code java
   @interface ExampleAnnotation{
     String value(); // Annotation Property
@@ -9,9 +12,12 @@
 ** Annotation Annexure
 
 *** `@Component`
-    `@Component` is a generic stereotype annotation for any Spring managed component. `@Repository`, `@Service`, and `@Controller` are specializations of `@Component` for more specific use cases, for example, in the persistence, service, and presentation layers, respectively.
+    `@Component` is a generic stereotype annotation for any Spring managed
+    component. `@Repository`, `@Service`, and `@Controller` are specializations
+    of `@Component` for more specific use cases, for example, in the
+    persistence, service, and presentation layers, respectively.
 
 *** `@Repository`
-
-    This annotation is a a marker for any class that fulfills the role or /stereotype/ of a repository (known as Data Access Objects or DAO).
+    This annotation is a a marker for any class that fulfills the role or
+    /stereotype/ of a repository (known as Data Access Objects or DAO).
 

@@ -1,5 +1,6 @@
 * Aspect Oriented Programming
-  Aspect Oriented Programming (AOP) is a programming paradigm that enables developers to separate cross-cutting concerns from the business logic.
+  Aspect Oriented Programming (AOP) is a programming paradigm that enables
+  developers to separate cross-cutting concerns from the business logic.
 
   ~ Aspect: A module that encapsulates a concern.
   ~ Joint Point: A place in the program where the Aspect can be applied.
@@ -12,17 +13,22 @@
   @end
 
 * RESTful APIs
-  For an API to be considered RESTful, it must adhere to 6 architectural constraints:
+  For an API to be considered RESTful, it must adhere to 6 architectural
+  constraints:
 
-  ~ Client-Server Architectural: The API must separate the client and the server from each other. Allowing independent evolution of both.
+  ~ Client-Server Architectural: The API must separate the client and the
+    server from each other. Allowing independent evolution of both.
   ~ Statelessness: No state is stored on the server.
   ~ Chacheability: Caching should be possible.
   ~ Uniform Interface: Consistent structure for interaction with API.
   ~ Layered System: Can have multiple layers.
-  ~ Code on Demand: The server can send executable code the client. Rarely used.
+  ~ Code on Demand: The server can send executable code the client. Rarely
+    used.
 
 * Java Class Path System
-  Java loads classes from all the JARs or directories listed in the CLASSPATH environment variable, without knowing the logical relationship between them. It is essentially a `:` separated list of directories and JAR files.
+  Java loads classes from all the JARs or directories listed in the CLASSPATH
+  environment variable, without knowing the logical relationship between them.
+  It is essentially a `:` separated list of directories and JAR files.
 
 
   The class path can be set in multiple ways:
