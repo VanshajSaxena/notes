@@ -10,8 +10,10 @@
    Manual techniques of cryptography, which were used before the advent of
    computers. These include:
    - Substitution Ciphers
-   - Transposition Ciphers These methods are now only of historical interest,
-     these are not relevant today as these are easily broken.
+   - Transposition Ciphers
+
+   These methods are now only of historical interest, these are not relevant
+   today as these are easily broken.
 
 ** Modern Cryptography
    Modern cryptography leverages complex mathematical algorithms and computer
@@ -42,15 +44,14 @@
      - Diffie-Hellman Key Exchange: Allows two parties to securely agree on a
        shared secret over an insecure channel.
 
-     ---
+     Advantages: Solves the key distribution problem inherent in symmetric
+     cryptography.
+     Application: Secure messaging digital certificates, and establishing
+     encrypted connections (like TLS/SSL).
 
-    Advantages: Solves the key distribution problem inherent in symmetric
-    cryptography. Application: Secure messaging digital certificates, and
-    establishing encrypted connections (like TLS/SSL).
-
-    Typically slower than symmetric encryption, which is why many systems use
-    hybrid encryption (using asymmetric methods to securely exchange a
-    symmetric key, then encrypting the bulk data with the symmetric cipher).
+     Typically slower than symmetric encryption, which is why many systems use
+     hybrid encryption (using asymmetric methods to securely exchange a
+     symmetric key, then encrypting the bulk data with the symmetric cipher).
 
 *** Cryptographic Hash Functions
     A hash function takes an input (or "message") and returns a fixed-size
@@ -63,8 +64,9 @@
     - Collision Resistance: It should be hard to find two different inputs that
       produce the same hash.
 
-    Examples: SHA-256, SHA-3. Applications: Data integrity checks, password
-    storage, digital signatures, and blockchain.
+    Examples: SHA-256, SHA-3.
+    Applications: Data integrity checks, password storage, digital signatures,
+    and blockchain.
 
 *** Digital Signatures
     Digital signatures use asymmetric cryptography to provide a means of
@@ -79,11 +81,10 @@
        public key and compares the resulting digest with a newly computed hash
        of the received message.
 
-     ---
-
-    Examples: RSA Signatures, DSA (Digital Signature Algorithm), ECDSA
-    (Elliptic Curve Digital Signature Algorithm). Applications: Secure
-    communications, software distribution, and legal contracts.
+     Examples: RSA Signatures, DSA (Digital Signature Algorithm), ECDSA
+     (Elliptic Curve Digital Signature Algorithm).
+     Applications: Secure communications, software distribution, and legal
+     contracts.
 
 *** Message Authentication Codecs (MACs)
     A MAC is a short piece of information used to authenticate a message and
@@ -93,7 +94,6 @@
      MACs use symmetric keys and require both parties to share the same secret
      key, whereas digital signatures use asymmetric keys.
 
-     ---
+     Examples: HMAC (Hash-based MAC), CMAC (Cipher-based MAC).
+     Applications: Verifying data integrity and authenticity in communications.
 
-    Examples: HMAC (Hash-based MAC), CMAC (Cipher-based MAC). Applications:
-    Verifying data integrity and authenticity in communications.
