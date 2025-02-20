@@ -8,5 +8,5 @@
 
 ** Core Technologies
 
-   ~ Spring Framework's [Inversion of Control (IoC) Container]{:$/spring-framework/inversion-of-control:* Inversion of Control}.
-   ~ Spring's [Aspect-Oriented Programming (AOP)]{:$/spring-framework/aspect-oriented-programming:* Aspect Oriented Programming}: Spring has its own AOP framework.
+   ~ Spring Framework's [Inversion of Control (IoC) Container]{:$/spring-framework/inversion-of-control:# Inversion of Control}.
+   ~ Spring's [Aspect-Oriented Programming (AOP)]{:$/spring-framework/aspect-oriented-programming:# Aspect Oriented Programming}: Spring has its own AOP framework.
