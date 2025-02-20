@@ -4,20 +4,120 @@
   that are processed at compile-time or runtime by the JVM.
 
   @code java
-  @interface ExampleAnnotation{
+  @interface ExampleAnnotation {
     String value(); // Annotation Property
   }
   @end
 
 ** Annotation Annexure
 
-*** `@Component`
-    `@Component` is a generic stereotype annotation for any Spring managed
-    component. `@Repository`, `@Service`, and `@Controller` are specializations
-    of `@Component` for more specific use cases, for example, in the
-    persistence, service, and presentation layers, respectively.
+*** Spring IoC Container Annotations
 
-*** `@Repository`
-    This annotation is a a marker for any class that fulfills the role or
-    /stereotype/ of a repository (known as Data Access Objects or DAO).
+**** `@Component`
+     `@Component` is a generic stereotype annotation for any Spring managed
+     component. {# `@Repository`}, {# `@Service`}, and {# `@Controller`} are
+     specializations of `@Component` for more specific use cases, for example,
+     in the persistence, service, and presentation layers, respectively.
+
+**** `@Repository`
+     This annotation is a a marker for any class that fulfills the role or
+     /stereotype/ of a repository (known as Data Access Objects or DAO).
+
+**** `@Service`
+
+**** `@Controller`
+
+*** Java Persistence Annotations
+
+**** `@Entity`
+     This annotation is used to mark a class as an entity, which means it will
+     be mapped to a database table. It represents a row in the table.
+
+**** `@Id`
+     Marks a field in an entity as the primary key for the entity.
+
+**** `@GeneratedValue`
+     Specifies the strategy for generating primary key values. Common
+     strategies include `AUTO`, `IDENTITY`, `SEQUENCE`, and `TABLE`.
+
+**** `@Column`
+     Used to specify details about how a field is mapped to a column in the
+     database. You can define attributes like column name, length, nullable,
+     unique, etc.
+
+**** `@Table`
+     Specifies the name of the database table to which an entity is mapped. If
+     not specified, the default is the entity class name.
+
+**** `@OneToOne`
+     Defines a one-to-one relationship between two entities.
+
+**** `@OneToMany`
+     Defines a one-to-many relationship between two entities.
+
+**** `@ManyToOne`
+     Defines a many-to-one relationship between two entities.
+
+**** `@ManyToMany`
+     Defines a many-to-many relationship between two entities.
+
+**** `@JoinColumn`
+     Specifies a column used for joining tables in relationships (for
+     {# `@ManyToOne`}, {# `@OneToOne`} ,etc.).
+
+**** `@JoinTable`
+     Specifies a join table for many-to-many relationships.
+
+**** `@Transient`
+     Marks a field that should not be persisted in the database (i.e., it won't
+     be mapped to a column).
+
+**** `@Embeddable`
+     Marks a class as embeddable, meaning its fields can be included as part of
+     another entity.
+
+**** `@Embedded`
+     Used in an entity to indicate that an embeddable object (annotated with {#
+     `@Embeddable`}) is embedded in that entity.
+
+**** `@Version`
+     Used to mark a field as the version of an entity. This is used for
+     optimistic locking.
+
+**** `@Basic`
+     Marks a field as a basic (non-relational) persistent property. This is
+     often used to control the fetch type (lazy or eager).
+
+**** `@Access`
+     Specifies whether the JPA provider should access the entity's state using
+     fields or getter methods.
+
+**** `@Query` (for custom queries)
+     This is used in the {# `@Repository`} interface to define custom JPQL or
+     SQL queries.
+
+*** Lombok Annotations
+
+**** `@Data`
+     `@Data` is a convenient shortcut annotation that bundles the features of
+     {# `@ToString`}, {# `@EqualsAndHashCode`}, {# `@Getter`}, and {# `@Setter`}.
+
+**** `@Getter`
+     Use `@Getter` on any field to generate a standard getter method. If used
+     at the class level, it will generate getter methods for all *non-static*
+     and *non-final* fields. It will generate a getter for a final field if the
+     field is not initialized and does not have a setter.
+
+**** `@Setter`
+     Use `@Setter` on any field to generate a standard setter method. Like the
+     {# `@Getter`} if used at the class level, it will generate setter methods
+     for all *non-static* and *non-final* fields.
+
+**** `@ToString`
+     Generates an implementation for the `toString` method inherited by all
+     objects, consisting of printing the values of relevant fields.
+
+**** `@EqualsAndHashCode`
+     Generates implementations for the `equals` and `hashCode` methods
+     inherited by all objects, based on relevant fields.
 
