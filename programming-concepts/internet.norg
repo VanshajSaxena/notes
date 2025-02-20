@@ -4,13 +4,13 @@
 
    - Stateless
    - Signed and Encrypted
-   - Used in APIs and microservices
+   - Used in APIs and Micro-Services
 
 ** Cookies
 
    - Stateful (stored locally)
    - Can be stolen
-   - Browser-based auth
+   - Browser-based Authentication
 
 ** Server-Side Session
 
