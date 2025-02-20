@@ -1,0 +1,36 @@
+* Generics (Parametric Polymorphism)
+  Java Generics allows to write classes, interfaces, and methods that can
+  operate on *objects of various types* while providing *compile-time type
+  safety*. Instead of writing multiple versions of the same code to handle
+  different data types, generics enables to write *type-independent* code and
+  still keep the ability to catch type errors during compilation.
+
+  Generics allows us to define *placeholders* for types that can be specified
+  later. These placeholders are often represented with letters like `T`, `E`,
+  `K`, and `V`. The actual type is determined when the generic class is
+  instantiated. The key advantage of this is that it allows to *reuse code for
+  different types*, and *enforce type safety at compile time*.
+
+  @code java
+  public static <T> GenericExample<T> getGenericExample() {
+    return new GenericExample<T>();
+  }
+  @end
+
+  Here `<T>` before the return type `<GenericExample<T>` is a *type parameter*.
+  It is a placeholder for an actual type that will be specified when the method
+  is invoked. `T` is just a name (convention) used to represent a *generic
+  type*. This could be replaced with any letter or word.
+
+  `<T>` is used at the beginning of the method signature to declare that the
+  method or class works with a *generic type*.
+
+** Type Erasure
+   At *compile-time* Java knows about the generic types, but at *runtime,
+   generic type information is erased*. This is called *type erasure*.
+
+** Bounds
+   Generic-type bounding allows us to restrict what types can be used instead
+   of the generic type. This make it possible to treat generics
+   polymorphic-ally.
+
