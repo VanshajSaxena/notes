@@ -1,6 +1,6 @@
 * Annotations
   Annotations are *metadata* that provide additional information about the code
-  without affection its execution directly. These are *special interface* types
+  without affecting its execution directly. These are *special interface* types
   that are processed at compile-time or runtime by the JVM.
 
   @code java
@@ -20,7 +20,7 @@
      in the persistence, service, and presentation layers, respectively.
 
 **** `@Repository`
-     This annotation is a a marker for any class that fulfills the role or
+     This annotation is a marker for any class that fulfills the role or
      /stereotype/ of a repository (known as Data Access Objects or DAO).
 
 **** `@Service`
