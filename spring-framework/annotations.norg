@@ -24,8 +24,12 @@
      /stereotype/ of a repository (known as Data Access Objects or DAO).
 
 **** `@Service`
+     Indicates that an annotated class is a service component, holding the
+     business logic. It is typically used in the service layer of an application.
 
 **** `@Controller`
+     Marks a class as a Spring MVC controller, which handles HTTP requests,
+     orchestrates user interactions, and returns appropriate responses or views.
 
 *** Java Persistence Annotations
 
@@ -100,7 +104,8 @@
 
 **** `@Data`
      `@Data` is a convenient shortcut annotation that bundles the features of
-     {# `@ToString`}, {# `@EqualsAndHashCode`}, {# `@Getter`}, and {# `@Setter`}.
+     {# `@Getter`}, {# `@Setter`}, {# `@ToString`} and {# `@EqualsAndHashCode`}
+     and {# `@RequiredArgsConstructor`}.
 
 **** `@Getter`
      Use `@Getter` on any field to generate a standard getter method. If used
@@ -120,4 +125,20 @@
 **** `@EqualsAndHashCode`
      Generates implementations for the `equals` and `hashCode` methods
      inherited by all objects, based on relevant fields.
+
+**** `@RequiredArgsConstructor`
+     Generates a constructor for all final fields, as well as fields marked
+     with `@NonNull`, ensuring that required properties are initialized.
+
+**** `@AllArgsConstructor`
+     Generates a constructor with a parameter for each field in the class,
+     allowing full initialization in one step.
+
+**** `@NoArgsConstructor`
+     Generates a default no-argument constructor, useful for frameworks that
+     require a no-arg constructor for instantiation.
+
+**** `@Builder`
+     Automatically produces a builder API for constructing instances of the
+     class, enabling a fluent and flexible approach to object creation.
 
