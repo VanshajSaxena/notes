@@ -11,26 +11,192 @@
   instantiated. The key advantage of this is that it allows to *reuse code for
   different types*, and *enforce type safety at compile time*.
 
-  @code java
-  public static <T> GenericExample<T> getGenericExample() {
-    return new GenericExample<T>();
-  }
-  @end
+** Type Parameter
 
-  Here `<T>` before the return type `<GenericExample<T>` is a *type parameter*.
-  It is a placeholder for an actual type that will be specified when the method
-  is invoked. `T` is just a name (convention) used to represent a *generic
-  type*. This could be replaced with any letter or word.
+   @code java
+   // a simple example of a generic method
+   public static <T> GenericExample<T> getGenericExample() {
+     return new GenericExample<T>();
+   }
+   @end
 
-  `<T>` is used at the beginning of the method signature to declare that the
-  method or class works with a *generic type*.
+   Here `<T>` before the return type `GenericExample<T>` is a *type parameter*.
+   It is a placeholder for an actual type that will be specified when the
+   method is invoked. `T` is just a name (convention) used to represent a
+   *generic type*. This could be replaced with any letter or word.
+
+   `<T>` is used at the beginning of the method signature to declare that the
+   method or class works with a *generic type*.
+
+   Java generics allows to declare more than one type parameter. `<T, S>`
+   indicates that two independent type parameters are being used. There is no
+   fixed upper limit on the number of type parameters.
+
+*** Bounded Type Parameters
+    It is possible to limit the types that can be used instead of the generic
+    type. This makes it possible to treat generics polymorphically. For example:
+    @code java
+    public <T extends Number> void process(T number) {
+    }
+    @end
+    Here, `T` is limited to `Number` and its subclasses.
+
+** Wildcards
+   Wildcards are represented by `?` and denote an *unknown type*. They are used
+   in type arguments to provide more flexibility when the exact type is not
+   important or when you want to allow a range of types.
+
+   `List<?>` represents a list of some unknown type. You can read from it
+   safely (as an `Object`), but you cannot add elements (except `null`) because
+   the specific type is only determined during runtime.
+
+   Wildcards are only used in method or variable parameter declarations
+   (generic structures), not in the [generic type parameter]{# Type Parameter}
+   declaration of a class, instance, or a method. Hence, something
+   like this is illegal:
+
+   @code java
+   // `<?>` is not allowed
+   public static <?> GenericExample<T> getGenericExample() {
+     return new GenericExample<T>();
+   }
+   // this is legal
+   public GenericExample<?> getGenericExample() {
+     // here is no link between the wildcard `?` parameter and the return
+     // parameter type `T`. The method has to take care of the return type
+     // itself.
+     return new GenericExample<T>();
+   }
+   @end
+
+*** Wildcard Bounds
+    It is possible to limit the types that can be used as arguments for a
+    method or a structure, allowing polymorphism with type safety.
+
+    The wildcard parameters can be bounded in two ways, either by [lower
+    bounding]{# Contravariance} it or by [upper bounding it]{# Covariance}.
+
+**** Covariance
+     We bound a generic structure to an upper bound using *Covariance*.
+
+     @code java
+     // using the extends keyword
+     List<? extends Number>
+     @end
+
+     Here the list can work with any subtype of `Number` but *its only allowed
+     to read from it*.
+
+**** Contravariance
+     We bound a generic structure to an lower bound using *Contravariance*.
+
+     @code java
+     // using the super keyword
+     List<? super Number>
+     @end
+
+     Here the list can work with any supertype of `Number` but *its only allowed
+     to write into it*.
+
+     ---
+
+    During compilation the compiler checks for compatibility based on generics
+    constraints and enforces type safety. Basically, the compiler ensures that
+    the source code does not work with any out-of-bound parameter for the
+    declared bounded type. No information is actually removed (not verified),
+    but is only done at the runtime called [type erasure]{# Type Erasure}.
+
+**** Producer Extends, Consumer Super (PECS)
+     The PECS mnemonic stands for "Producer Extends, Consumer Super" and is a
+     guideline for choosing the correct wildcard when working with generics. It
+     ensures that you enforce type safety by clearly expressing whether a
+     generic structure is only going to produce data (read from it) or consume
+     data (write to it).
+
+***** Producer: Use ? extends Type
+      - When a generic structure is used as a *producer* (i.e., you only
+        retrieve data from it), you use `? extends Type`. This indicates that
+        the collection or parameter can hold objects of some unknown type that
+        is a subclass of `Type`.
+      - You can safely read items as instances of `Type`.
+      - You cannot add new items (except `null`) because the exact subtype is
+        unknown.
+
+      @code java
+      public void printNumbers(List<? extends Number> numbers) {
+        for (Number num : numbers) {
+          System.out.println(num);
+        }
+        // numbers.add(1); // Error: Cannot add to a producer list
+      }
+      @end
+
+      - In this case, `List<? extends Number>` means the list might be a
+        `List<Integer>`, `List<Double>`, etc. Although every element is at
+        least a `Number`, you cannot add a specific type because the compiler
+        cannot ensure type safety for writes.
+
+***** Consumer: Use ? super Type
+      - When a generic structure is used as a *consumer* (i.e., you only insert
+        data into it), you use `? super Type`. This tells the compiler that the
+        structure can accept objects of type `Type` or any of its subtypes.
+      - You can safely add items of type `Type` into the structure.
+      - When reading from it, the compiler only guarantees that the elements
+        are at least of type `Object`, so you might need to cast them if a more
+        specific type is required.
+
+      @code java
+      public void addIntegers(List<? super Integer> list) {
+        list.add(10);
+        list.add(20);
+        // Integer num = list.get(0); // Error: The returned type is Object,
+        // not necessarily Integer
+      }
+      @end
+
+      - Here, `List<? super Integer>` could be a `List<Integer>`,
+        `List<Number>`, or even a `List<Object>`. This flexibility allows the
+        method to consume integers regardless of the actual list type, as long
+        as it can accept an Integer.
+
+***** Practical Example: Copying Elements Between Collections
+      A classic use-case of PECS is a method that copies elements from one list
+      to another. In such a method, the source list is a producer and the
+      destination list is a consumer.
+
+      @code java
+      public static <T> void copy(List<? extends T> src, List<? super T> dest) {
+        for (T item : src) {
+          dest.add(item);
+        }
+      }
+      @end
+
+      - `src` is defined as `List<? extends T>` because it only produces items
+        of type `T` (or its subtypes).
+      - `dest` is defined as `List<? super T>` because it consumes items of
+        type `T`. This declaration guarantees that every item from `src` can be
+        safely added to `dest` without any type conflict.
+
+***** Key Points to Remember
+      - *[Covariance]{# Covariance} with `? extends`:* Use it when you only
+        need to read (produce) data from a structure. It allows flexibility in
+        accepting a range of subtypes but restricts writing.
+      - *[Contravariance]{# Contravariance} with `? super`:* Use it when you
+        only need to write (consume) data into a structure. It permits adding
+        items of the specified type, though reading from it yields only the
+        most general type (Object).
+      - The PECS guideline helps you design APIs that are both flexible and
+        type-safe, ensuring that you correctly manage data flow between
+        producers and consumers in generic code.
 
 ** Type Erasure
    At *compile-time* Java knows about the generic types, but at *runtime,
    generic type information is erased*. This is called *type erasure*.
 
-** Bounds
-   Generic-type bounding allows us to restrict what types can be used instead
-   of the generic type. This make it possible to treat generics
-   polymorphic-ally.
+   @code java
+   List<? extends T>
+   @end
 
+   A list like this during compilation retails this generic information, but at
+   the JVM infers it as a raw List.
