@@ -86,7 +86,7 @@
      Applications: Secure communications, software distribution, and legal
      contracts.
 
-*** Message Authentication Codecs (MACs)
+*** Message Authentication Codes (MACs)
     A MAC is a short piece of information used to authenticate a message and
     ensure its integrity, using a secret key.
 
