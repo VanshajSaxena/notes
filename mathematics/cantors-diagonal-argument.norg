@@ -1,0 +1,24 @@
+* Cantor's Diagonal Argument
+  Cantor's Diagonal Argument is a proof that shows the set of real numbers (or
+  even just the numbers between 0 and 1) is “uncountably infinite” — meaning
+  its size (cardinality) is strictly larger than that of the natural numbers.
+
+  In set theory Cantor's Diagonal Argument shows that the set of real numbers
+  in the interval \[0,1\] is uncountable. This means that, unlike the set of
+  natural numbers N, the real numbers cannot be listed in a sequence (i.e.,
+  there is no one-to-one correspondence between N and the real numbers in
+  \[0,1\]).
+
+
+  A set S is called countable if its elements can be arranged in a sequence.
+  Formally, S is countable if there exists a bijection.
+
+  @math
+  \[ f :
+  \mathbb{N} \to S.
+  \]
+  @end
+
+  A set is uncountable if no such bijection exists. Cantor's Diagonal Argument
+  shows that the real numbers in \[0,1]\ form an uncountable set.
+
