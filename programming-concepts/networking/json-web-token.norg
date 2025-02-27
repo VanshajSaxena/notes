@@ -132,6 +132,8 @@
     and, in the case of tokens signed with a private key, it can also verify
     that the sender of the JWT is who it says it is.
 
+    To play around with a JWT, visit: {https://jwt.io/}
+
 ** Terminology
    The terms "JSON Web Signature (JWS)", "Base64url Encoding", "Header
    Parameter", "JOSE Header", "JWS Compact Serialization", "JWS Payload", "JWS
