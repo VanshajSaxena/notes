@@ -31,6 +31,10 @@
      Marks a class as a Spring MVC controller, which handles HTTP requests,
      orchestrates user interactions, and returns appropriate responses or views.
 
+**** `@Autowired`
+     Spring automatically injects the dependent beans into the associated
+     fields, methods, or constructors, during runtime.
+
 *** Java Persistence Annotations
 
 **** `@Entity`
@@ -142,3 +146,79 @@
      Automatically produces a builder API for constructing instances of the
      class, enabling a fluent and flexible approach to object creation.
 
+*** Spring MVC Annotations
+
+**** `@RequestMapping`
+     Maps HTTP requests to handler methods of MVC and REST controllers. Can be
+     applied at the class or method level to define URL patterns and HTTP
+     methods (e.g., GET, POST).
+
+**** `@PathVariable`
+     Binds a method parameter to a URI template variable, extracting values
+     from the URL path.
+
+**** `@RequestParam`
+     Binds a method parameter to a query parameter in the HTTP request,
+     enabling access to URL parameters.
+
+**** `@RequestBody`
+     Maps the HTTP request body to a transfer or domain object, facilitating
+     automatic deserialization of the inbound data.
+
+**** `@ResponseBody`
+     Indicates that the return value of a method should be used as the response
+     body, bypassing the traditional view resolution process.
+
+**** `@ResponseStatus`
+     Marks a method or exception class with a specific HTTP status code and
+     reason, which will be returned to the client when invoked.
+
+**** `@ExceptionHandler`
+     Defines a method as the handler for specific exceptions thrown during
+     request processing, enabling centralized exception management.
+
+**** `@ControllerAdvice`
+     Allows for global exception handling, data binding, and model attributes
+     across multiple controllers, acting as an interceptor of exceptions.
+
+*** Spring Boot Annotations
+
+**** `@SpringBootApplication`
+     A convenience annotation that combines {# `@Configuration`},
+     {# `@EnableAutoConfiguration`}, and {# `@ComponentScan`} to bootstrap a
+     Spring Boot application with sensible defaults.
+
+**** `@EnableAutoConfiguration`
+     Tells Spring Boot to automatically configure the application based on the
+     dependencies present on the classpath, reducing the need for explicit bean
+     definitions.
+
+**** `@Configuration`
+     Indicates that a class declares one or more {# `@Bean`} methods and may be
+     processed by the Spring container to generate bean definitions and service
+     requests.
+
+**** `@ComponentScan`
+     Instructs Spring to scan the specified packages for components,
+     configurations, and services, enabling automatic detection of beans.
+
+**** `@ConditionalOnBean`
+     Specifies that a bean should only be created if a particular bean is
+     already present in the application context.
+
+**** `@ConditionalOnClass`
+     Indicates that a bean should only be created if a specified class is
+     available on the classpath, ensuring compatibility with optional
+     dependencies.
+
+**** `@ConditionalOnProperty`
+     Configures a bean to be created only if a specific configuration property
+     is present and (optionally) set to a particular value.
+
+**** `@ConditionalOnWebApplication`
+     Indicates that a bean should only be loaded if the application is a web
+     application, based on the presence of web-specific infrastructure.
+
+**** `@ConditionalOnNotWebApplication`
+     Indicates that a bean should only be loaded if the application is not a
+     web application, enabling alternative configurations in non-web contexts.
