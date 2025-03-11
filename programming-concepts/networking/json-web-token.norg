@@ -65,9 +65,9 @@
     - `alg`: and the signing algorithm being used, such as HS256 (HMAC with
       SHA256, uses symmetric key), RS256 (RSA with SHA256, uses asymmetric
       key).
-    - `typ`: (Optional) The type of the token, which is typically "JWT".
+    - `typ`: (Optional) The type of the token, which is typically "JWT",
+      indicates token type.
     
-
     @code json
     {
       "alg": "HS256",
@@ -75,43 +75,49 @@
     }
     @end
 
-    This JSON is a Base64url-encoded representation of the header.
+    Then, this JSON object is Base64Url encoded to form the first part of the
+    JWT.
 
 *** Payload
-    The second part of the token is the payload, which contains the claims.
-    Claims are statements about an entity (typically, the user) and additional
-    data. There are three types of claims: registered, public, and private
-    claims.
+    The second part of the token is the payload, which is also a JSON object
+    and contains the claims. Claims are statements about an entity (typically,
+    the user) and additional data. There are three types of claims:
 
 **** Registered claims
      These are a set of predefined claims which are not mandatory but
-     recommended, to provide a set of useful, interoperable claims. Some of
-     them are: iss (issuer), exp (expiration time), sub (subject), aud
-     (audience), and others.
+     recommended, to provide a set of useful, interoperable claims.
+
+     - `iss` (Issuer): Identifies the principal that issued the JWT.
+     - `sub` (Subject): Identifies the principal that is the subject of the JWT.
+     - `aud` (Audience): Identifies the recipients that the JWT is intended for.
+     - `exp` (Expiration Time): Specifies when the token expires.
+     - `nbf` (Not Before): Specifies when the token becomes valid.
+     - `iat` (Issued At): Indicates when the token was issued.
+     - `jti` (JWT ID): A unique identifier for the token.
 
      *Notice that the claim names are only three characters long, as JWT is
-     meant to be compact.*
+     designed to be compact.*
 
 **** Public claims
-     These can be defined at will by those using JWTs. But to avoid collisions,
-     they should be defined in the IANA JSON Web Token Registry or be defined
-     as a URI that contains a collision-resistant namespace.
+     Custom claims that can be defined to share information, but should be
+     collision-resistant.
 
 **** Private claims
-     These are the custom claims created to share information between parties
-     that agree on using them and are neither registered or public claims.
-
-     An example payload could be:
+     Custom claims that are agreed upon between the two parties, these are not
+     required to be registered for standardised interpretation.
 
      @code json
      {
        "sub": "1234567890",
        "name": "John",
-       "admin": true
+       "admin": true,
+       "iat": 1516239022,
+       "exp": 1610138120,
      }
      @end
 
-     This JSON is a Base64url-encoded representation of the payload.
+     Then, this JSON object is Base64Url encoded to form the second part of the
+     JWT.
 
 *** Signature
     To create the signature part you have to take the encoded header, the
