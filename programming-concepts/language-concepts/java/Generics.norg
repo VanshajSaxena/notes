@@ -84,8 +84,8 @@
      List<? extends Number>
      @end
 
-     Here the list can work with any subtype of `Number` but *its only allowed
-     to read from it*.
+     Here the list can work with any subtype of `Number` but *its only safe to
+     read from it*.
 
 **** Contravariance
      We bound a generic structure to an lower bound using *Contravariance*.
@@ -95,7 +95,7 @@
      List<? super Number>
      @end
 
-     Here the list can work with any supertype of `Number` but *its only allowed
+     Here the list can work with any supertype of `Number` but *its only safe
      to write into it*.
 
      ---
@@ -104,7 +104,7 @@
     constraints and enforces type safety. Basically, the compiler ensures that
     the source code does not work with any out-of-bound parameter for the
     declared bounded type. No information is actually removed (not verified),
-    but is only done at the runtime called [type erasure]{# Type Erasure}.
+    but it is done at the runtime called [type erasure]{# Type Erasure}.
 
 **** Producer Extends, Consumer Super (PECS)
      The PECS mnemonic stands for "Producer Extends, Consumer Super" and is a
