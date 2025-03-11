@@ -8,30 +8,23 @@
   digitally signed. JWTs can be signed using a secret (with the HMAC algorithm)
   or a public/private key pair using RSA or ECDSA.
 
-  Although JWTs can be encrypted to also provide secrecy between parties, we
-  will focus on signed tokens. Signed tokens can verify the integrity of the
-  claims contained within it, while encrypted tokens hide those claims from
-  other parties. When tokens are signed using public/private key pairs, the
-  signature also certifies that only the party holding the private key is the
-  one that signed it.
-
 ** Abstract
    JSON Web Token (JWT) is a compact, URL-safe means of representing claims to
    be transferred between two parties.  The claims in a JWT are encoded as a
-   JSON object that is used as the payload of a JSON Web Signature (JWS)
-   structure or as the plaintext of a JSON Web Encryption (JWE) structure,
+   JSON object that is used as the payload of a JSON Web Signature ([JWS])
+   structure or as the plaintext of a JSON Web Encryption ([JWE]) structure,
    enabling the claims to be digitally signed or integrity protected with a
    [Message Authentication Code (MAC)]{:$/programming-concepts/cryptography/overview:# Message Authentication Codes (MACs)} and/or encrypted.
 
 ** [JSON Web Token (JWT) Overview]{https://datatracker.ietf.org/doc/html/rfc7519#section-3}
    JWTs represent a set of claims as a JSON object that is encoded in a [JWS]
-   and/or JWT structure.  This JSON object is the JWT Claims Set. As per
-   Section 4 of RFC 7159 [RFC7159], the JSON object consists of zero or more
-   name/value pairs (or members), where the names are strings and the values
-   are arbitrary JSON values.  These members are the claims represented by the
-   JWT.  This JSON object MAY contain whitespace and/or line breaks before or
-   after any JSON values or structural characters, in accordance with Section 2
-   of [RFC7159]{https://datatracker.ietf.org/doc/html/rfc7159}.
+   and/or [JWT] structure.  This JSON object is the JWT Claims Set. As per
+   Section 4 of [RFC7159], the JSON object consists of zero or more name/value
+   pairs (or members), where the names are strings and the values are arbitrary
+   JSON values.  These members are the claims represented by the JWT.  This
+   JSON object MAY contain whitespace and/or line breaks before or after any
+   JSON values or structural characters, in accordance with Section 2 of
+   [RFC7159]{https://datatracker.ietf.org/doc/html/rfc7159}.
 
    The member names within the JWT Claims Set are referred to as Claim Names.
    The corresponding values are referred to as Claim Values.
@@ -66,8 +59,14 @@
    @end
 
 *** Header
-    The header typically consists of two parts: the type of the token, which is
-    JWT, and the signing algorithm being used, such as HMAC SHA256 or RSA.
+    The header is a JSON object. The header typically consists of two key-value
+    pairs:
+
+    - `alg`: and the signing algorithm being used, such as HS256 (HMAC with
+      SHA256, uses symmetric key), RS256 (RSA with SHA256, uses asymmetric
+      key).
+    - `typ`: (Optional) The type of the token, which is typically "JWT".
+    
 
     @code json
     {
@@ -138,12 +137,12 @@
    The terms "JSON Web Signature (JWS)", "Base64url Encoding", "Header
    Parameter", "JOSE Header", "JWS Compact Serialization", "JWS Payload", "JWS
    Signature", and "Unsecured JWS" are defined by the JWS specification
-   [JWS]{https://datatracker.ietf.org/doc/html/rfc7519#ref-JWS}.
+   [JWS]{https://datatracker.ietf.org/doc/html/rfc7515}.
 
    The terms "JSON Web Encryption (JWE)", "Content Encryption Key (CEK)", "JWE
    Compact Serialization", "JWE Encrypted Key", and "JWE Initialization Vector"
    are defined by the JWE specification
-   [JWE]{https://datatracker.ietf.org/doc/html/rfc7519#ref-JWE}.
+   [JWE]{https://datatracker.ietf.org/doc/html/rfc7516}.
 
    The terms "Ciphertext", "Digital Signature", "Message Authentication Code
    (MAC)", and "Plaintext" are defined by the "Internet Security Glossary,
