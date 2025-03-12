@@ -1,4 +1,4 @@
-* JSON Web Token
+* JSON Web Token (JWT)
 
   {https://tools.ietf.org/html/rfc7519}[Full Specification]
 
@@ -18,13 +18,13 @@
 
 ** [JSON Web Token (JWT) Overview]{https://datatracker.ietf.org/doc/html/rfc7519#section-3}
    JWTs represent a set of claims as a JSON object that is encoded in a [JWS]
-   and/or [JWT] structure.  This JSON object is the JWT Claims Set. As per
-   Section 4 of [RFC7159], the JSON object consists of zero or more name/value
-   pairs (or members), where the names are strings and the values are arbitrary
-   JSON values.  These members are the claims represented by the JWT.  This
-   JSON object MAY contain whitespace and/or line breaks before or after any
-   JSON values or structural characters, in accordance with Section 2 of
-   [RFC7159]{https://datatracker.ietf.org/doc/html/rfc7159}.
+   and/or [JWT]{# JSON Web Token (JWT)} structure.  This JSON object is the JWT
+   Claims Set. As per Section 4 of [RFC7159], the JSON object consists of zero
+   or more name/value pairs (or members), where the names are strings and the
+   values are arbitrary JSON values.  These members are the claims represented
+   by the JWT.  This JSON object MAY contain whitespace and/or line breaks
+   before or after any JSON values or structural characters, in accordance with
+   Section 2 of [RFC7159]{https://datatracker.ietf.org/doc/html/rfc7159}.
 
    The member names within the JWT Claims Set are referred to as Claim Names.
    The corresponding values are referred to as Claim Values.
@@ -95,7 +95,7 @@
      - `iat` (Issued At): Indicates when the token was issued.
      - `jti` (JWT ID): A unique identifier for the token.
 
-     *Notice that the claim names are only three characters long, as JWT is
+     *Note that the claim names are only three characters long, as JWT is
      designed to be compact.*
 
 **** Public claims
@@ -134,7 +134,7 @@
     HS256(base64UrlEncode(header) + "." + base64UrlEncode(payload), secret)
     @end
 
-    Then this hash is Base64Url encoded to form the signature.
+    Then this keyed-hash is Base64Url encoded to form the signature.
 
     This signature is then appended to the header and payload, this makes a
     complete *JWT*.
@@ -144,6 +144,72 @@
     sender of the JWT is who it says it is.
 
     To play around with a JWT, visit: {https://jwt.io/}
+
+** A Typical JWT Creating Process
+   Typically a [JWT] is created and used as follows:
+
+*** JWT Creation (Server Side):
+
+    - *JSON Objects*: We start with a header JSON object and a payload JSON
+      object (containing claims).
+
+    - *Encoding*: Both the header and payload are Base64URL encoded separately,
+      and then concatenated with a dot (`.`) forming a string like:
+
+    @code css
+    encodedHeader + "." + encodedPayload
+    @end
+
+    - *Hashing*: Then a keyed-hashing algorithm is used (typically, HMAC with
+      SHA-256 (HS256)), which is unlike a plain hash algorithm uses a secret
+      key in addition to the data, which makes the hash dependent on both the
+      data and the key. This ensures only someone with the secret key can
+      compute and verify (recompute later) the hash.
+
+    - *Signature*: The result of the HMAC (keyed-hash) is then Base64URL
+      encoded. This becomes the signature. Finally, the JWT is created by
+      appending this signature with the encoded header and encoded payload dot
+      concatenated string.
+
+    @code css
+    encodedHeader + "." + encodedPayload + "." + encodedSignature
+    @end
+
+    - *Transmission*: Since the header and payload are only encoded (not
+      encrypted), anyone with the token can decode and read them. Therefore,
+      it's crucial to send the JWT over a secure channel (like HTTPS) to
+      prevent interception.
+
+*** JWT Usage (Client Side):
+
+    - *Storage*: The client receives the JWT and stores it (commonly in local
+      storage or secure, HTTP-only cookies).
+
+    - *Subsequent Requests*: For every request requiring authorization, the
+      client sends the token—typically in the `Authorization` header as a Bearer
+      token:
+
+    @code css
+    Authorization: Bearer <JWT>
+    @end
+
+*** JWT Verification (Server Side):
+
+    - *Parsing*: Upon receiving the token, the server splits it into its
+      three parts: header, payload, and signature.
+
+    - *Recomputing Signature*: The server takes the original encoded header and
+      payload (i.e., the “header.payload” string) and recomputes the HMAC using
+      the same secret key and algorithm as was used to create the token.
+
+    - *Comparing Signatures*:  The computed signature is then Base64URL encoded
+      and compared with the signature part extracted from the token. If they
+      match, the token is considered valid; if not, it indicates that the token
+      has been tampered with or was generated using a different key.
+
+    - *Additional Claim Checks*: Beyond the signature, the server may also
+      validate claims (like `exp`, `nbf`, `iss`, etc.) to further ensure that
+      the token is still valid.
 
 ** Terminology
    The terms "JSON Web Signature (JWS)", "Base64url Encoding", "Header
