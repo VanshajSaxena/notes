@@ -2,6 +2,6 @@
 
 ** Index
 
-   ~ [Combinatorics]{:$/mathematics/combinatorics:# Combinatorics}
-   ~ [Permutations]{:$/mathematics/permutations:# Permutations}
-   ~ [Cantor's Diagonal Argument]{:$/mathematics/cantors-diagonal-argument:# Cantor's Diagonal Argument}
+   ~ {:$/mathematics/combinatorics:# Combinatorics}[Combinatorics]
+   ~ {:$/mathematics/permutations:# Permutations}[Permutations]
+   ~ {:$/mathematics/cantors-diagonal-argument:# Cantor's Diagonal Argument}[Cantor's Diagonal Argument]
