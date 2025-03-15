@@ -2,6 +2,6 @@
 
 ** Index
 
-   ~ {:$/programming-concepts/cryptography/cryptography-index:# Index}[Cryptography]
-   ~ {:$/programming-concepts/networking/networking-index:# Index}[Networking]
-   ~ {:$/programming-concepts/language-concepts/language-concepts-index:# Index}[Language Concepts]
+   ~ {:./cryptography/cryptography-index:# Index}[Cryptography]
+   ~ {:./networking/networking-index:# Index}[Networking]
+   ~ {:./language-concepts/language-concepts-index:# Index}[Language Concepts]

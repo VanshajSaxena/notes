@@ -2,5 +2,5 @@
 
 ** Index
 
-   ~ {:$/programming-concepts/networking/overview:# Computer Networking}[Overview]
-   ~ {:$/programming-concepts/networking/json-web-token:# JSON Web Token}[JSON Web Token (JWT)]
+   ~ {:./overview:# Computer Networking}[Overview]
+   ~ {:./json-web-token:# JSON Web Token (JWT)}[JSON Web Token (JWT)]

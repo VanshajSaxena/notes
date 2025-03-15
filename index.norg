@@ -2,5 +2,6 @@
 
 ** Notes Index
 
-   ~ {:$/spring-framework/spring-framework-index:# Spring Framework}[Spring Framework]
-   ~ {:$/programming-concepts/programming-concepts-index:# Index}[Programming Concepts]
+   ~ {:./spring-framework/spring-framework-index:# Spring Framework}[Spring Framework]
+   ~ {:./programming-concepts/programming-concepts-index:# Index}[Programming Concepts]
+   ~ {:./mathematics/mathematics-index:# Index}[Mathematics]
