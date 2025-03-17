@@ -28,3 +28,37 @@
     - Checks if the instance already exist.
     - If not, it creates a new instance.
     - If an instance already exists, it skips the creation step.
+
+*** Thread-Safe Singleton
+
+    @code java
+    class ThreadSafeSingleton {
+      private static ThreadSafeSingleton instance;
+
+      private ThreadSafeSingleton() {}
+
+      // Public method to get the instance, with synchronized keyword
+      public static synchronized ThreadSafeSingleton getInstance() {
+        if (instance == null) {
+          instance = new ThreadSafeSingleton();
+        }
+        return instance;
+      }
+    }
+    @end
+
+    This method achieves thread-safety by making the `getInstance` method
+    synchronized.
+
+    The `synchronized` keyword in Java is used to ensure that only one thread
+    can execute a particular block of code. This ensures exclusive locking and
+    mutual exclusion. If some other thread is waiting for the lock, the OS
+    may pause and context switch to another thread.
+
+    The synchronized block of code not only provides mutual exclusion but also
+    includes memory visibility guarantee. It does this by flushing its local
+    caches so that it sees the most recent values from the main memory before
+    entering the synchronized block (acquiring a lock). Just before exiting the
+    synchronized block (releasing the lock) any changes made within the block
+    are flushed to the main memory, making them visible to all other threads.
+
