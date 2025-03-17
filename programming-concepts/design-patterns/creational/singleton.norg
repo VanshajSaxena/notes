@@ -154,7 +154,7 @@
     It is considered as the best way to create a singleton in Java by many
     experts. However, it is not always suitable if we need to extend the class
     or if lazy initialization is a requirement.
-   
+
 *** Static Block Singleton
 
     @code java
