@@ -2,3 +2,29 @@
   Singleton Patterns is a creational design pattern that guarantees a class has
   only one instance and provides a global point of access to it.
 
+** Implementation
+   A singleton object can be implemented by restricting construction of the
+   singleton class by other classes, by making the *constructor private* and
+   providing a *public static method* to access the singleton object directly
+   from the class.
+
+   .image ./singleton.webp
+
+*** Lazy Initialization
+
+    @code java
+    class Singleton {
+      private static Singleton instance;
+
+      private Singleton() {}
+
+      public static Singleton getInstance() {
+        if (instance == null) instance = new Singleton();
+        return instance;
+      }
+    }
+    @end
+
+    - Checks if the instance already exist.
+    - If not, it creates a new instance.
+    - If an instance already exists, it skips the creation step.

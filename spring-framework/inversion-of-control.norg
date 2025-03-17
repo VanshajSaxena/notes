@@ -78,7 +78,7 @@
       the default scope.
     ~ prototype: A new instance is created each time a bean is requested.
       Spring does not manage the complete lifestyle of a prototype bean. The
-      client code must clean up prototype-scope objects.
+      client code must clean up prototype-scoped bean objects.
     ~ request(web): A new bean is created for each HTTP request.
     ~ session(web): A new bean is created per HTTP session.
     ~ application(web): A single bean is created per `ServeletContext` (shared
