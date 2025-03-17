@@ -3,5 +3,6 @@
 ** Index
 
    ~ {:./cryptography/cryptography-index:# Index}[Cryptography]
-   ~ {:./networking/networking-index:# Index}[Networking]
+   ~ {:./design-patterns/design-patterns-index:# Index}[Design Patterns]
    ~ {:./language-concepts/language-concepts-index:# Index}[Language Concepts]
+   ~ {:./networking/networking-index:# Index}[Networking]
