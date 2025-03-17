@@ -15,9 +15,11 @@
 
 **** `@Component`
      `@Component` is a generic stereotype annotation for any Spring managed
-     component. {# `@Repository`}, {# `@Service`}, and {# `@Controller`} are
-     specializations of `@Component` for more specific use cases, for example,
-     in the persistence, service, and presentation layers, respectively.
+     component, that can be automatically detected and registered in the
+     application context. {# `@Repository`}, {# `@Service`}, and {# `@Controller`}
+     are specializations of `@Component` for more specific use cases, for
+     example, in the persistence, service, and presentation layers,
+     respectively.
 
 **** `@Repository`
      This annotation is a marker for any class that fulfills the role or
@@ -194,9 +196,10 @@
      definitions.
 
 **** `@Configuration`
-     Indicates that a class declares one or more {# `@Bean`} methods and may be
-     processed by the Spring container to generate bean definitions and service
-     requests.
+     This annotation is used to define *configuration class* that declares
+     Spring beans using {# `@Bean`} methods. It ensures that *beans are
+     singleton by default* (even if the method is called multiple times). This
+     is a Java-based alternative to XML based configuration.
 
 **** `@ComponentScan`
      Instructs Spring to scan the specified packages for components,
