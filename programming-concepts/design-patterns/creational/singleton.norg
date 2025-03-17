@@ -138,3 +138,46 @@
     This provides a balance between lazy initialization, thread safety and
     efficiency, without using explicit synchronization.
 
+*** Enum Singleton
+
+    @code java
+    public enum EnumSingleton {
+      INSTANCE;
+
+      // public method
+      public void doSomething() {
+        // Add any singleton logic.
+      }
+    }
+    @end
+
+    It is considered as the best way to create a singleton in Java by many
+    experts. However, it is not always suitable if we need to extend the class
+    or if lazy initialization is a requirement.
+   
+*** Static Block Singleton
+
+    @code java
+    class StaticBlockSingleton {
+      private static StaticBlockSingleton instance;
+
+      private StaticBlockSingleton() {}
+
+      // Static block for initialization
+      static {
+        try {
+          instance = new StaticBlockSingleton();
+        } catch (Exception e) {
+          throw new RuntimeException("Exception occurred in creating singleton instance");
+        }
+      }
+
+      public static StaticBlockSingleton getInstance() {
+        return instance;
+      }
+    }
+    @end
+
+    The static block is executed when the class is loaded by the JVM. If any
+    Exception is occurs, a `RuntimeException` can be thrown. It is thread-safe
+    but not lazy-loaded.
