@@ -3,3 +3,5 @@
 ** Index
 
    ~ {:./singleton:# Singleton}[Singleton]
+   ~ {:./factory-method:# Factory Method}[Factory Method]
+   ~ {:./builder:# builder}[Builder]

@@ -4,5 +4,7 @@
 
    ~ {:./creational/creational-design-patterns-index:# Index}[Creational Design Patterns]
    ~~ {:./creational/singleton:# Singleton}[Singleton]
+   ~~ {:./creational/factory-method:# Factory Method}[Factory Method]
+   ~~ {:./creational/builder:# Builder}[Builder]
    ~ {:./structural/structural-design-patterns-index:}[Structural Design Patterns]
    ~ {:./behavioral/behavioral-design-patterns-index:}[Behavioral Design Patterns]
