@@ -14,7 +14,7 @@
    JSON object that is used as the payload of a JSON Web Signature ([JWS])
    structure or as the plaintext of a JSON Web Encryption ([JWE]) structure,
    enabling the claims to be digitally signed or integrity protected with a
-   [Message Authentication Code (MAC)]{:$/programming-concepts/cryptography/overview:# Message Authentication Codes (MACs)} and/or encrypted.
+   [MAC]{:./../cryptography/overview:# Message Authentication Codes (MACs)} and/or encrypted.
 
 ** [JSON Web Token (JWT) Overview]{https://datatracker.ietf.org/doc/html/rfc7519#section-3}
    JWTs represent a set of claims as a JSON object that is encoded in a [JWS]
