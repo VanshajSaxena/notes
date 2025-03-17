@@ -62,3 +62,35 @@
     synchronized block (releasing the lock) any changes made within the block
     are flushed to the main memory, making them visible to all other threads.
 
+*** Double Checked Locking
+
+    @code java
+    class DoubleCheckedSingleton {
+      // The single instance, initially null, marked as volatile
+      private static volatile DoubleCheckedSingleton instance;
+
+      private DoubleCheckedSingleton() {}
+
+      public static DoubleCheckedSingleton getInstance() {
+        // First check (not synchronized)
+        if (instance == null) {
+          // Synchronize on the class object
+          synchronized (DoubleCheckedSingleton.class) {
+            // Second check (synchronized)
+            if (instance == null) {
+              instance = new DoubleCheckedSingleton();
+            }
+          }
+        }
+        return instance;
+      }
+    }
+    @end
+
+    This singleton class makes its instance volatile, which makes any write to
+    the variable flushed to the main memory immediately, making it visible to
+    all CPU cores.
+
+    A part of the `getInstance` method is also synchronized which acquires a
+    lock on the class object of the class.
+
