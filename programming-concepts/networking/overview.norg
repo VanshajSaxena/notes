@@ -61,7 +61,7 @@
     Firewalls control the incoming and outgoing traffic between a network and
     the internet, based on predefined security rules.
 
-*** Encryptions [(see Cryptography)]{:$/programming-concepts/cryptography/cryptography-index:}
+*** Encryptions [(see Cryptography)]{:./../cryptography/cryptography-index:}
     Encryption is the process of converting data into a secure format that can
     only be decrypted with the correct key. It ensures privacy and security for
     data in transit.

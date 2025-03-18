@@ -14,7 +14,7 @@
   Formally, S is countable if there exists a bijection.
 
   @math
-  $f : \mathbb{N} \to S.$
+  $f : \mathbb{N} \to S$
   @end
 
   A set is uncountable if no such bijection exists. Cantor's Diagonal Argument
