@@ -3,7 +3,7 @@
   protocols that enable different software components to communicate and
   transfer data.
 
-** API Request Response Life Cycle
+** API Request Response Cycle
    APIs work by sharing data between software systems (applications, devices,
    web apps). This happens through a request and response cycle. A request is
    sent to the API, which retrieves the data and returns it to the caller.
@@ -25,9 +25,9 @@
 
 **** Methods
      The request's method indicates the type of operation the client would like
-     to perform on a given resource. REST APIs are accessible through standard
-     HTTP methods, which perform common actions like retrieving, creating,
-     updating and deleting data.
+     to perform on a given resource. [REST]{# REST} APIs are accessible through
+     standard HTTP methods, which perform common actions like retrieving,
+     creating, updating and deleting data.
 
 **** Parameters
      Parameters are the variables that are passes to an API endpoint to provide
@@ -71,32 +71,27 @@
      The response body includes the actual data or content the client asked for
      \- or an error message if something went wrong.
 
-** API Design Paradigms
+** API Architectures
 
-*** REST (Representational State Transfer)
-
-    - Focuses on resources, identified by URIs and uses standard HTTP methods
-      (GET, POST, PUT, DELETE) for operations.
-    - It has statelessness, uniform interface.
+*** REST
+    REST stands for Representational State Transfer. It focuses on resources
+    identified by URIs (endpoints) and uses standard HTTP methods such as
+    `GET`, `POST`, `PUT` and `DELETE` for operations.
 
 *** GraphQL
+    Open-source query language that allows clients to specify exactly what data
+    they need in a single request, without chaining multiple requests together.
+    This reduces the number of round trips between the client and server.
 
-    - Allows clients to specify exactly what data they need in a single
-      request.
-    - Reduces over or under fetching of resources, supports nested queries and
-      gives flexibility in shaping responses.
+*** RPC
+    RPC stands for Remote Procedural Call. It invokes methods on remote systems
+    as if they were local functions calls. Often tightly coupled to specific
+    procedures or operations, can be implemented in various transport protocols
+    (HTTP, gRPC, etc.).
 
-*** RPC (Remote Procedural Call)
-
-    - Invokes methods on remote systems as if they were local functions calls.
-    - Often tightly coupled to specific procedures or operations, can be
-      implemented in various transport protocols (HTTP, gRPC, etc.).
-
-*** SOAP (Simple Object Access Protocol)
-
-    - Relies on XML-based messaging for communication and enforces strict
-      contract defined by WSDL.
-    - Strong emphasis on standards and formal contracts, useful in enterprise
-      scenarios where rigorous security and transactional integrity are
-      required.
+*** SOAP
+    SOAP stands for Simple Object Access Protocol. It relies on XML-based
+    messaging for communication and enforces strict contract defined by WSDL.
+    Strong emphasis on standards and formal contracts, useful in enterprise
+    scenarios where rigorous security and transactional integrity are required.
 
