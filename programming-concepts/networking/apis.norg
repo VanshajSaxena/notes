@@ -46,6 +46,31 @@
      that is required to create, update, or delete a resource. The request body
      for the blogging API might include article's content, title and author.
 
+*** API server
+    The API client sends the request to the API server, which is responsible
+    for handling authentication, validating input data, and retrieving or
+    manipulating data.
+
+*** API response
+    Finally, the API server sends a response to the client. An API response
+    typically includes the following components.
+
+**** Status code
+     HTTP status codes are three-digit codes that indicate the outcome of an
+     API request. Some of the most common status codes include `200 OK`, which
+     indicates that the server successfully returned the requested data, `201
+     Created`, which indicates the server successfully created a new resource
+     and `404 Not Found`, which indicates that the server could not find the
+     requested resource.
+
+**** Response headers
+     HTTP response headers are very similar to request header, except they are
+     used to provide additional information about the server's response.
+
+**** Response body
+     The response body includes the actual data or content the client asked for
+     \- or an error message if something went wrong.
+
 ** API Design Paradigms
 
 *** REST (Representational State Transfer)
