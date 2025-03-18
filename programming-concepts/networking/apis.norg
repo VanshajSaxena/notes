@@ -1,0 +1,35 @@
+* APIs
+  An API (Application Programming Interface) is defined as a contract through
+  which different software systems communicate. It serves as a layer of
+  abstraction, hiding internal complexities while exposing only what is
+  necessary for client to interact with the system.
+
+** API Design Paradigms
+
+*** REST (Representational State Transfer)
+
+    - Focuses on resources, identified by URIs and uses standard HTTP methods
+      (GET, POST, PUT, DELETE) for operations.
+    - It has statelessness, uniform interface.
+
+*** GraphQL
+
+    - Allows clients to specify exactly what data they need in a single
+      request.
+    - Reduces over or under fetching of resources, supports nested queries and
+      gives flexibility in shaping responses.
+
+*** RPC (Remote Procedural Call)
+
+    - Invokes methods on remote systems as if they were local functions calls.
+    - Often tightly coupled to specific procedures or operations, can be
+      implemented in various transport protocols (HTTP, gRPC, etc.).
+
+*** SOAP (Simple Object Access Protocol)
+
+    - Relies on XML-based messaging for communication and enforces strict
+      contract defined by WSDL.
+    - Strong emphasis on standards and formal contracts, useful in enterprise
+      scenarios where rigorous security and transactional integrity are
+      required.
+
