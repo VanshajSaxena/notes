@@ -95,3 +95,11 @@
     Strong emphasis on standards and formal contracts, useful in enterprise
     scenarios where rigorous security and transactional integrity are required.
 
+*** Webhooks
+    Webhooks are use to implement event-driven architectures, in which request
+    are automatically sent in response to event-based triggers. When a specific
+    event occurs in an application, such as a payment being made, the
+    application can send an HTTP request to a pre-configured webhook URL with
+    the relevant event data in the request payload. The system that receives
+    the webhook can then process the event and take the appropriate action.
+
