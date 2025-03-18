@@ -1,8 +1,50 @@
 * APIs
-  An API (Application Programming Interface) is defined as a contract through
-  which different software systems communicate. It serves as a layer of
-  abstraction, hiding internal complexities while exposing only what is
-  necessary for client to interact with the system.
+  An API, which stands for Application Programming Interface, is a set of
+  protocols that enable different software components to communicate and
+  transfer data.
+
+** API Request Response Life Cycle
+   APIs work by sharing data between software systems (applications, devices,
+   web apps). This happens through a request and response cycle. A request is
+   sent to the API, which retrieves the data and returns it to the caller.
+
+*** API Client
+    The API client is responsible for starting the conversation by sending the
+    request to the API server. The request can be triggered in many ways.A user
+    might initiate an API request by entering a search term or clicking a
+    button. API requests may also be triggered by external events, such as a
+    notification from another application.
+
+*** API Request
+    An API request typically includes the following components:
+
+**** Endpoint
+     An API endpoint is a dedicated URL that provides access to a specific
+     resource. An `/articles` endpoint in a blogging app would include the
+     logic for processing all requests that are related to articles.
+
+**** Methods
+     The request's method indicates the type of operation the client would like
+     to perform on a given resource. REST APIs are accessible through standard
+     HTTP methods, which perform common actions like retrieving, creating,
+     updating and deleting data.
+
+**** Parameters
+     Parameters are the variables that are passes to an API endpoint to provide
+     specific instructions for the API to process. These parameters can be
+     included in the API request as a part of the URL, in the query string, or
+     in the request body. The `/article` endpoint of a blogging API might
+     accept a "topic" parameter, which it would use to access and return
+     articles on a specific topic.
+
+**** Request Headers
+     Request headers are key-value pairs that provide extra details about the
+     request, such as its content type or authentication credentials.
+
+**** Request body
+     The body is the main part of the request, and it includes the actual data
+     that is required to create, update, or delete a resource. The request body
+     for the blogging API might include article's content, title and author.
 
 ** API Design Paradigms
 
