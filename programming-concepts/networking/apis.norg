@@ -1,4 +1,4 @@
-* APIs
+* API
   An API, which stands for Application Programming Interface, is a set of
   protocols that enable different software components to communicate and
   transfer data.
@@ -103,3 +103,6 @@
     the relevant event data in the request payload. The system that receives
     the webhook can then process the event and take the appropriate action.
 
+    ===
+
+{https://www.postman.com/api-platform/api-lifecycle/}[API Lifecycle]

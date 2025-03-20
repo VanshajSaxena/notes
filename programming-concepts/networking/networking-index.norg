@@ -4,4 +4,4 @@
 
    ~ {:./overview:# Computer Networking}[Overview]
    ~ {:./json-web-token:# JSON Web Token (JWT)}[JSON Web Token (JWT)]
-   ~ {:./apis:# APIs}[Application Programming Interfaces (APIs)]
+   ~ {:./apis:# API}[Application Programming Interfaces (APIs)]
