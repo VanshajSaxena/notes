@@ -1,0 +1,14 @@
+* [OpenAPI Specification]{https://learn.openapis.org/introduction.html#introduction}
+  The *OpenAPI Specification (OAS)* allows the description of a remote API
+  accessible through HTTP or HTTP-like protocols. This description, which may
+  be stored as one or more documents (such as local files or HTTP-accessible
+  network resources), is called an *OpenAPI Description (OAD)*.
+
+  An *API description file* (sometimes called contract) is a *machine-readable*
+  specification of an API. It should strive to be as *complete*, and
+  *fully-detailed* as possible, although absolute completeness is not usually a
+  requirement. Also, just like legal contracts, the more *unambiguous* it is,
+  the more useful it becomes.
+
+  - {https://openapi-map.apihandyman.io/}[OpenAPI Map]
+
