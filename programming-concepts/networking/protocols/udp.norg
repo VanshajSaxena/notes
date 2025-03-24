@@ -1,0 +1,17 @@
+* User Datagram Protocol
+
+** Cons
+
+   - No Acknowledgement
+   - No Guaranteed Delivery
+   - Connectionless
+   - No Congestion Control
+   - No Ordered Packets
+   - Security
+
+** Pros
+
+   - Smaller Packets
+   - Less Bandwidth
+   - Faster than TCP
+   - Stateless

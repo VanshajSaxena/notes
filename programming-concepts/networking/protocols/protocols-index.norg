@@ -4,4 +4,4 @@
 
      ~ {:./http:# HTTP Protocol}[HTTP Protocol]
      ~ {:./tcp:# Transmission Control Protocol}[TCP Protocol]
-     ~ {:./udp:# UDP Protocol}[UDP Protocol]
+     ~ {:./udp:# User Datagram Protocol}[UDP Protocol]
