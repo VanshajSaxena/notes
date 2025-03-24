@@ -3,5 +3,6 @@
 ** Index
 
    ~ {:./overview:# Computer Networking}[Overview]
+   ~ {:./osi:# Open Systems Interconnection}[Open Systems Interconnection]
    ~ {:./json-web-token:# JSON Web Token (JWT)}[JSON Web Token (JWT)]
    ~ {:./apis/apis-index:# Index}[Application Programming Interfaces (APIs)]
