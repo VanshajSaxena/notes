@@ -2,6 +2,7 @@
 
   ** Index
 
-     ~ {:./http:# HTTP Protocol}[HTTP Protocol]
+     ~ {:./http:# Hypertext Transfer Protocol}[HTTP Protocol]
      ~ {:./tcp:# Transmission Control Protocol}[TCP Protocol]
      ~ {:./udp:# User Datagram Protocol}[UDP Protocol]
+     ~ {:./tls:# Transport Layer Security}[Transport Layer Security]
