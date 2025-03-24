@@ -1,0 +1,17 @@
+* Transmission Control Protocol
+
+** Pros
+
+   - Acknowledgement
+   - Guaranteed Delivery
+   - Connection Based
+   - Congestion Control
+   - Ordered Packets
+
+** Cons
+
+   - Larger Packets
+   - More Bandwidth
+   - Slower than UDP
+   - Stateful
+   - Server Memory (DOS)
