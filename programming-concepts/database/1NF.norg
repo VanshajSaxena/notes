@@ -1,0 +1,24 @@
+* First Normal Form
+
+** Rules for 1NF
+   ~ Using the row order to convey information is not permitted.
+   ~ Mixing data types within same column is not permitted.
+   ~ Having a table without a primary key is not permitted.
+   ~ Repeating groups are not permitted.
+
+** Rules for 2NF
+   ~ Each non-key attribute must depend on the entire primary key.
+
+** Rules for 3NF (BCNF)
+   ~ Every /non-key/ attribute in a table should depend on the key, the whole
+     key, and nothing but the key, i.e. there should be no dependency of a
+     non-key attribute to a non-key attribute.
+
+** Rules for 4NF
+   ~ Multivalued dependencies in a table must be multivalued dependencies on
+     the key.
+
+** Rules for 5NF
+   ~ The table (which must be in 4NF) cannot be describable as the logical
+     result of joining some other tables together.
+
