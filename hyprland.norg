@@ -1,0 +1,39 @@
+* Hyprland Shortcuts
+
+** Window Movement
+
+   ~ focus movement across windows on same workspace. default is (ALT + hjkl)
+   ~ window movement on the same workspace. default is (Win + CTRL + hjkl)
+   ~ window movement across different workspace. default is (Win + SHIFT + hjkl)
+
+   > ALT behaviour breaks the code snippet movement within neovim when you try
+   > to move focus of windows with ALT (1) on the same workspace.
+
+*** Available keys to key mapping combinations
+
+    ~ <Win> (both right and left)
+    ~ <CTRL> (both right and left)
+    ~ <SHIFT> (both right and left)
+    ~ <ALT> (with the above caveat) (both right and left)
+
+** Special Workspace
+
+   ~ default is (Win + <key>), to move to special workspace.
+   ~ default is (Win + SHIFT + <key>) to toggle special named workspace.
+   ~ can be remapped to anything that is considered comfortable e.g. (<Tab>).
+   ~ can have multiple named special workspaces, that are toggled with
+     different set of keys.
+
+     ===
+** Solution
+
+   ~ focus movement (Win + hjkl)
+   ~ window movement within same workspace (Win + CTRL + hjkl)
+   ~ window movement across different workspaces (Win + SHIFT + CTRL + hjkl)
+   ~ workspace switching (Win + SHIFT + hjkl)
+
+** Reason for this soluion
+
+   ~ avoids ALT key being ignored issue for kitty (neovim)
+   ~ clearly separates key binding of various different operation types
+   ~ usage of more keys
