@@ -7,3 +7,7 @@
    ~ {:./apis/apis-index:# Index}[Application Programming Interfaces (APIs)]
    ~ {:./json-web-token:# JSON Web Token (JWT)}[JSON Web Token (JWT)]
    ~ {:./protocols/protocols-index:}[Communication Protocols]
+
+** Useful Links
+
+   - {https://web.stanford.edu/class/msande91si/www-spr04/readings/week1/InternetWhitepaper.htm}[How does the Internet Work: Stanford]
