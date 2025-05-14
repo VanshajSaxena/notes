@@ -1,0 +1,184 @@
+* [Explain it to Me Like I'm 5: OAuth2 and OpenID]{https://www.youtube.com/watch?v=5th6CSQTdpM}
+
+** OAuth2 Roles (Terminology)
+
+   - *Resource Owner*: Let's say you have a jacket.
+   ~~ You are the resource owner.
+   ~~ The jacket is the resource.
+   - *Resource Server*: You put the jacket in a locker.
+   ~~ The locker is the resource server.
+   - *Authorization Server*: There is a lock on the locker.
+   ~~ The lock is the authorization server.
+   - *Client/Application*: Your friend gets your coat for you.
+   ~~ Your friend is a client/application.
+
+** Tokens
+
+   - *Access Tokens*:
+     Movie ticket; possession is the law.
+
+   ~~ Bearer Token?
+   ~~ JWT Token?
+   ~~ Opaque Token?
+
+   - *Refresh Tokens*:
+     Parent's credit card; used to buy more movie tickets 😇.
+
+** Scopes
+
+   A synonym with a security role or a permission.
+
+   - *A Job Role*:
+   ~ Like Principal or Teacher.
+   ~ A permitted authority or action.
+   ~ What does it look like?
+   ~~ Often dot separated: eat.cookies
+   ~~ Google uses URLs: `https://www.googleapis.com/auth/calender.readOnly`
+
+** How Scopes are Applied
+
+   - Available set of scopes is restricted to the intersection of all
+     available scopes.
+   - The resulting set is what's available for a user accessing an
+     application.
+   - How a scope is interpreted is *only* enforced by the resource server.
+
+   Client/Application: serve.lunch, eat.lunch
+   Authorization Server: cook.lunch, eat.lunch
+   User Login Form / Approval: eat.lunch
+
+   *Result*: eat.lunch 👍
+
+** Grant Types
+
+   - *Client Credentials*: Service to service communication.
+   - *Authorization Code*: Browser-based user login. Use with web, Mobile,
+     SPAs and CLIs. Add PKCE for additional security.
+   - *Device Code*: Televisions and environments with limited input
+     capabilities.
+   - *Refresh*: Obtain new tokens when one expires.
+   - *Password & Implicit*: Less secure option for CLI, Mobile apps and SPAs.
+
+*** Client Credentials
+
+    - Simplest flow
+    - Very similar to username/password except client is trusted.
+    - Intended to machine-to-machine usage, automation and back-channel
+      communication.
+    - Each client/application has id & secret.
+    - The id & secret is used to retrieve an access token.
+
+    - *How it works*:
+    -- Jacket (resource) is put in the locker (resource server).
+    -- You forget your key.
+    -- Janitor (client) has keys (id & secret), opens lock (authorization
+       server) and retrieves your coat (resource).
+
+*** Password
+
+    - Very simple, but has three actors: user, client and resource server.
+    - User must trust client absolutely.
+    - Client obtains user's *actual password*. _INSECURE_
+    - User provides password to the client, client uses password to get a
+      token, client uses token to access resource server.
+
+    - *How it works*:
+    -- Jacket (resource) is put in the locker (resource server).
+    -- You forget your jacket.
+    -- You give your friend (client) your key (credentials), who can now open
+       the lock (authorization server) and fetch your jacket (resource).
+
+*** Authorization Code
+
+    - Confidential, secure and Browser-based.
+    - Can be used with mobile or cli apps, so long as a browser is available.
+    - Makes heavy use of browser redirects, but also back channel requests.
+    - Users may have the option to approve permissions granted to
+      client/application.
+    - Can be performed with *PKCE* (client generated secret) when client
+      cannot be trusted like an SPA.
+    - Implicit is a similar process, but without the temporary auth code.
+      _Implicit is Insecure_
+
+    - *How it works*:
+    -- Jacket (resource) is put in the locker (resource server).
+    -- You want to lent your jacket to a friend.
+    -- Your friend (client) goes to locker, locker calls you (redirect), you
+       enter your key (login) and confirm access. Your friend gets a
+       temporary key (auth code), your friend opens the lock (access token)
+       and gets the jacket.
+
+** OpenID Connect
+
+   OpenID Connect is an extension to OAuth2.
+
+   - Standard to provide authentication (i.e. identity) on top of OAuth2
+     (authorization).
+   - Introduces:
+   -- JWT (JSON Web Token) standard format
+   -- An ID token with private information identifying the user (not an
+      access token, not used for accessing resources).
+   -- Some standard scopes like: openid, profile, email, etc.
+   -- Some standard endpoints like `/login`, `/token` and `/userinfo`
+   -- And other things like discovery, logout, etc.
+   - Still has all the OAuth2 goodness.
+
+*** OpenID Connect Authorization Code
+
+    - Confidential, secure and browser-based.
+    - Very similar to {# Authorization Code} flow.
+    - High level differences:
+    -- The goal is to authenticate (single sign-on), not access resource (i.e.
+       authorize).
+    -- You get back an id token instead of an access token.
+    - There is a hybrid flow where you get both an id token and access token.
+
+    - *How it works*:
+    -- You want to go to the swimming pool, but it's member's only.
+    -- The gate attendant (client) sends you (redirect) to the ticket booth
+       (authorization server), you show your id (login) and are given a wrist
+       band (id token), which can be used to enter the pool.
+
+** Spring Security - Login Example
+
+   ~ [Create a Spring Boot App with Spring Security, OAuth2 Client & Spring
+   Web starters]{start.spring.io}
+   ~ Create an OAuth2 client with your OAuth2 Provider.
+   ~~ The redirect URL will be: `{baseUrl}/login/oauth2/code/{registrationId}`
+   ~ Configure `application.properties` or `application.yaml`
+   ~~ `spring.security.oauth2.client.registration.{registrationId}.client-id=my-client-id`
+   ~~ `spring.security.oauth2.client.registration.{registrationId}.client-secret=my-client-secret`
+   ~~ `spring.security.oauth2.client.registration.{registrationId}.issuer-url=https://my-provider/..`
+   ~ Add a controller & endpoint
+   ~ Start your application: `./mvnw spring-boot:run`
+
+** Spring Security - Client Example
+
+   ~ Enable login support. (previou instructions)
+   ~ Add dependency to Maven/Gradle for `org.springframework:spring-webflux`
+     and `io.projectreactor.netty:reactor-netty`
+   ~ In the `WebSecurityConfigurerAdapter`, add `http.oauth2Client(withDefaults())`
+   ~ Create your `WebClient` bean.
+   ~ Create `OAuth2AuthorizedClientManager` &
+     `OAuth2AuthorizedClientProvider` beans
+   ~ Inject a `WebClient` into classes where it's needed (i.e. services &
+     controllers)
+   ~ User `WebClient` to make requests
+
+   > Most probably this is now outdated information, reference to
+   > documentation is needed.
+
+** Spring Security - Resource Server Example
+
+   ~ [Create a Spring Boot App with Spring Security, OAuth2 Resource Server & Spring
+   Web starters]{start.spring.io}
+   ~ Configure `application.properties` or `application.yaml`
+   ~~ `spring.security.oauth2.resourceserver.jwt.issuer-uri={auth-provider}/.well-known/jwks.json`
+   ~ Extend `WebSecurityConfigurerAdapter`
+   ~~ add `http.oauth2ResourceServer(oauth2ResourceServerConfigurer::jwt);`
+   ~~ define required roles, ex: `antMatchers(HttpMethod.GET,"/messages/**").hasAuthority("SCOPE_message:read")`
+   ~ Add controller and endpoint
+   ~ Start your application: `./mvnw spring-boot:run`
+
+   > Most probably this is now outdated information, reference to
+   > documentation is needed.
