@@ -1,0 +1,49 @@
+* [OAuth2, OpenID: SSO under the hood - Daniel Garnier]{https://www.youtube.com/watch?v=bH5PxcJzwME&list=WL&index=8}
+
+** OAuth 2 & 2.1
+
+   - An /Authorization/ framework
+   -- Goal: Grant *application* the *permission* to access *resources* through
+      *HTTP*.
+   - Using /tokens/, in this case `access_tokens`
+   - A long list of specs: {https://oauth.net/specs/}
+
+*** Example
+
+    👦 Daniel
+
+    authorizes
+
+    🖥️ photo-book.someservice.com
+
+    to access his pictures hosted on 
+
+    📷 Google Photos
+
+    (without sharing his 🔒 google password)
+
+** OpenID Connect
+
+   - An /Authentication/ framework
+   -- Goal: Give third-party *application* identity data managed by an identity
+      provider.
+   -- Therefore enabling Single-Sign-On (SSO)
+   - Based on OAuth2, this time using `id_token`
+   - And of course .. specs: {https://openid.net/developers/specs}
+
+   All OpenID Connect provider has a well-known openid-configuration endpoint.
+   Like for google it is:
+
+   @code
+   https://accounts.google.com/.well-known/openid-configuration
+   @end
+   ===
+
+Look into JWTs within cli:
+@code
+pbpaste | step crypto jwt inspect --insecure | jq
+@end
+
+`pbpaste` is basically the MacOS paste cli command. We have wl-paste for wayland
+based Linux environment.
+
