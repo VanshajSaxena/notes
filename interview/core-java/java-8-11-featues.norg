@@ -1,1 +1,199 @@
-* Java 8 and 11 Features
+* Important Java 8 and 11 Features
+
+** Java 8 Features
+
+*** Lambda Expressions
+    - A concise way to represent anonymous functions. They allow you to treat
+      functionality as a method argument or code as data.
+    - Reduces boilerplate code, especially for anonymous inner classes. Enables
+      functional programming in Java, making code more readable and concise.
+    @code java
+    // Before Java 8
+    new Thread(new Runnable() {
+      @Override
+      public void run() {
+        System.out.println("Hello from an old thread!");
+      }
+    }).start();
+    // With Java 8 Lambda
+    new Thread(() -> System.out.println("Hello from a lambda thread!")).start();
+    @end
+
+*** Functional Interfaces:
+    - Interfaces with exactly one abstract method. They serve as target types
+      for lambda expressions.
+    - Crucial for enabling lambda expressions. Java 8 introduced many new
+      functional interfaces in `java.util.function` (e.g., `Predicate`,
+      `Consumer`, `Function`, `Supplier`).
+      Example: `Runnable` is a functional interface. You can mark them with
+      `@FunctionalInterface` for compiler checks.
+
+*** Stream API:
+    - A new API for processing collections of objects in a functional style. It
+      allows for declarative, pipeline-like operations on data.
+    - Enables powerful data manipulation (filtering, mapping, reducing) with
+      less code. Supports both sequential and parallel processing, making it
+      easy to leverage multi-core processors.
+
+    @code java
+    List<String> names = Arrays.asList("Alice", "Bob", "Charlie", "David");
+    List<String> filteredNames = names.stream()
+    .filter(name -> name.startsWith("C"))
+    .map(String::toUpperCase)
+    .collect(Collectors.toList());
+    System.out.println(filteredNames); // Output: [CHARLIE]
+    @end
+
+*** Default and Static Methods in Interfaces:
+    - Interfaces can now have methods with implementations. `default` methods
+      allow adding new methods to interfaces without breaking existing
+      implementations. `static` methods provide utility methods related to the
+      interface.
+    - Solves the "interface evolution" problem, ensuring backward
+      compatibility. Widely used in the Collections API.
+
+    @code java
+    interface Vehicle {
+      void start();
+      default void horn() {
+        System.out.println("Beep beep!");
+      }
+      static void getType() {
+        System.out.println("Generic Vehicle");
+      }
+    }
+    @end
+
+*** Java Time API (Date and Time API):
+    - A completely new and improved API for handling dates and times
+      (`java.time` package). It addresses the shortcomings of the old
+      `java.util.Date` and `java.util.Calendar` classes (thread-safety,
+      immutability, design flaws).
+    - Provides immutable, thread-safe, and clearly defined classes for date,
+      time, and timezone operations, making date/time manipulation much easier
+      and less error-prone.
+      Classes: `LocalDate`, `LocalTime`, `LocalDateTime`, `ZonedDateTime`, `Duration`, `Period`, etc.
+
+*** `Optional` Class:
+    - A container object that may or may not contain a non-null value.
+    - Helps to prevent `NullPointerException` by providing a clear way to
+      indicate the absence of a value. Promotes more robust and readable code
+      by explicitly handling null scenarios.
+
+    @code java
+    Optional<String> name = Optional.ofNullable(getNameFromDatabase());
+    name.ifPresent(n -> System.out.println("Name: " + n));
+    String result = name.orElse("Default Name");
+    @end
+
+*** `forEach()` method in `Iterable` interface:
+    - A default method added to the `Iterable` interface (and thus to all
+      `Collection` types) that allows iterating over elements using a
+      `Consumer` (often a lambda expression).
+    - Provides a more concise and functional way to iterate over collections
+      compared to traditional `for` loops.
+
+** Java 11 Features (LTS Release with Enhancements)
+
+*** New HTTP Client API (Standardized):
+    - A new, standardized HTTP client (`java.net.http`) that supports HTTP/1.1
+      and HTTP/2, as well as WebSockets. It was introduced as an incubator
+      module in Java 9 and standardized in Java 11.
+    - Provides a modern, fluent, and asynchronous API for making HTTP requests,
+      replacing older, less efficient APIs. It simplifies interactions with web
+      services.
+
+    @code java
+    HttpClient client = HttpClient.newBuilder().build();
+    HttpRequest request = HttpRequest.newBuilder()
+    .uri(URI.create("https://www.example.com"))
+    .GET()
+    .build();
+    HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+    System.out.println(response.body());
+    @end
+
+*** New String Methods:
+    - Several new utility methods were added to the `String` class.
+    - Simplifies common string operations.
+      Examples:
+      `isBlank()`: Returns `true` if the string is empty or contains only whitespace.
+      `lines()`: Returns a `Stream<String>` of lines extracted from the string.
+      `strip()`, `stripLeading()`, `stripTrailing()`: More robust whitespace
+      removal methods than `trim()`, aware of Unicode whitespace characters.
+      `repeat(int count)`: Repeats the string `count` times.
+    @code java
+    String multiLine = "Line1\nLine2\n   ";
+    multiLine.lines().forEach(System.out::println); // Prints Line1, Line2, (empty line)
+    System.out.println("   hello   ".strip()); // "hello"
+    System.out.println("=".repeat(5)); // "====="
+    @end
+
+*** `Files.readString()` and `Files.writeString()`:
+    - New static methods in `java.nio.file.Files` for easily reading and
+      writing entire file contents as `String`s.
+    - Simplifies common file I/O operations, reducing boilerplate code.
+
+    @code java
+    Path filePath = Path.of("myfile.txt");
+    Files.writeString(filePath, "Hello, Java 11!");
+    String content = Files.readString(filePath);
+    System.out.println(content); // Output: Hello, Java 11!
+    @end
+
+*** Local-Variable Syntax for Lambda Parameters (`var` in Lambdas):
+    - Allows using `var` to declare the formal parameters of implicitly typed
+      lambda expressions, consistent with local variable type inference
+      introduced in Java 10.
+
+    @code java
+    List<String> list = Arrays.asList("a", "b", "c");
+    list.forEach((var item) -> System.out.println(item.toUpperCase()));
+    @end
+
+    - While not strictly necessary, it can improve readability in some cases,
+      especially when adding annotations to lambda parameters.
+
+    @code java
+    // Pre-Java 11: Must specify type to add annotation
+    List<String> list = Arrays.asList("a", "b", "c");
+    list.forEach((@NonNull String item) -> System.out.println(item.toUpperCase()));
+    // Java 11: Annotate with var
+    List<String> list = Arrays.asList("a", "b", "c");
+    list.forEach((@NonNull var item) -> System.out.println(item.toUpperCase()));
+    @end
+
+*** `Collection.toArray(IntFunction)` Default Method:
+    - A new overloaded `toArray` method in the `Collection` interface that
+      takes an `IntFunction` (typically a constructor reference) to create the
+      target array.
+    - Provides a more convenient and type-safe way to convert a collection to
+      an array of a specific type, avoiding the need for casting.
+
+    @code java
+    List<String> names = Arrays.asList("Alpha", "Beta");
+    String[] nameArray = names.toArray(String[]::new);
+    @end
+
+*** Epsilon: A No-Op Garbage Collector (Experimental):
+    - An experimental garbage collector that allocates memory but does not
+      reclaim it. The JVM will shut down when the heap is exhausted.
+    - Useful for performance testing (to isolate memory allocation overhead
+      from GC overhead), memory pressure testing, or extremely short-lived jobs
+      where GC is irrelevant.
+
+*** ZGC (Z Garbage Collector) (Experimental):
+    - A scalable, low-latency garbage collector designed for applications
+      requiring very low pause times (less than 10 ms), even with large heaps
+      (from a few hundred MB to multi-terabytes).
+    - A significant step towards minimizing GC pause times, crucial for highly
+      interactive and latency-sensitive applications.
+
+*** Java Flight Recorder (JFR) (Standardized):
+    - A profiling tool for collecting diagnostic and profiling data from a
+      running Java application with negligible performance overhead. Previously
+      a commercial feature in Oracle JDK, it's now open-sourced and part of
+      OpenJDK.
+    - Enables in-depth analysis of JVM and application behavior in production
+      environments, helping to diagnose performance bottlenecks and memory
+      leaks.
