@@ -198,5 +198,3 @@
    List<? extends T>
    @end
 
-   A list like this during compilation retails this generic information, but at
-   the JVM infers it as a raw List.
