@@ -18,7 +18,7 @@
 ** ( ) final keyword (class, method, variable)
 ** ( ) Enums & Usage
 ** ( ) equals() and hashCode() contract
-** (-) [Important Java 8 / 11 Features]{:./core-java/java-8-11-featues:}
+** (x) [Important Java 8 / 11 Features]{:./core-java/java-8-11-featues:}
 
 * ( ) Data Structures, Collections & Algorithms 🟢
 
