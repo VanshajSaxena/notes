@@ -1,0 +1,25 @@
+* Final keyword
+
+  The `final` keyword in Java is a non-access modifier that can be applied to
+  classes, methods, and variables. Its primary purpose is to *restrict*
+  *modification*, *inheritance*, or *reassignment*.
+
+** Key points for variables:
+
+   - *Primitive types*: For final primitive variables, the value itself cannot be changed.
+   - *Reference types*: For final reference variables, the reference itself
+     cannot be changed to point to a different object. However, /the contents
+   (state) of the object that the reference points to can be modified, unless
+   the object itself is immutable./
+
+** Key points for methods:
+
+   When a method is declared as final, *it cannot be overridden by subclasses*. This
+   is useful when you want to ensure that the implementation of a method remains
+   consistent throughout the inheritance hierarchy.
+
+** Key points for classes:
+
+   When a class is declared as final, *it cannot be subclassed (inherited from)*.
+   This means no other class can extend a final class.
+
