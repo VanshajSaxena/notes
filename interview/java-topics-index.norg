@@ -14,10 +14,10 @@
 ** ( ) Strings & String Pool (what is and how does it work)
 ** ( ) Immutable vs Mutable objects
 ** ( ) Static keyword (fields, methods, blocks)
-** ( ) Access Modifiers
+** (x) [Access Modifiers]{:./core-java/access-modifiers:}
 ** (x) [final keyword (class, method, variable)]{:./core-java/final-keyword:}
 ** (x) [Enums & Usage]{:./core-java/enums-and-usage:}
-** (x) [equals() and hashCode() contract]{:./core-java/equals-hashcode.norg:}
+** (x) [equals() and hashCode() contract]{:./core-java/equals-hashcode:}
 ** (x) [Important Java 8 / 11 Features]{:./core-java/java-8-11-featues:}
 
 * ( ) Data Structures, Collections & Algorithms 🟢

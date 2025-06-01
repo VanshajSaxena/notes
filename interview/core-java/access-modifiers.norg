@@ -1,0 +1,47 @@
+* Access Modifiers (Access Specifiers)
+
+** *`private`*:
+   - *Scope*: The most restrictive. Members declared `private` are accessible
+     only within the class where they are declared.
+   - *Usage*: Typically used for instance variables (fields) to protect their
+     internal state from direct modification by external classes. Access to
+     `private` fields is usually provided through `public` getter and setter
+     methods, allowing controlled modification and retrieval.
+   - *Applicability*: Can be applied to variables, methods, and constructors.
+     *Cannot be applied to top-level classes or interfaces*.
+
+** *`default` (or package-private)*:
+   - *Scope*: If no access modifier is explicitly specified, the member has
+     `default` access. This means it is accessible only within the same
+     package.
+   - *Usage*: Useful for classes, methods, or variables that are intended to be
+     used only by other classes within the same logical group (package).
+   - *Applicability*: *Can be applied to classes, variables, methods, and
+   constructors*.
+
+** *`protected`*:
+   - *Scope*: Accessible within the same package, and by subclasses (even if
+     the subclasses are in a different package).
+   - *Usage*: Used when you want to allow subclasses to access or override
+     certain members, while still preventing general public access.
+   - *Applicability*: Can be applied to variables, methods, and constructors.
+     *Cannot be applied to top-level classes or interfaces*.
+
+** *`public`*:
+   - *Scope*: The least restrictive. Members declared `public` are accessible
+     from anywhere in the application, regardless of the package.
+   - *Usage*: Used for classes, methods, and variables that are part of the
+     public API of a class or library and need to be universally accessible.
+   - *Applicability*: *Can be applied to classes, variables, methods, and
+   constructors*.
+
+   ===
+
+@code markdown
+| Modifier   | Within Same Class | Within Same Package | Subclass (different package) | Anywhere (different package, non-subclass) |
+| :--------- | :---------------- | :------------------ | :--------------------------- | :----------------------------------------- |
+| `private`  | Yes               | No                  | No                           | No                                         |
+| `default`  | Yes               | Yes                 | No                           | No                                         |
+| `protected`| Yes               | Yes                 | Yes                          | No                                         |
+| `public`   | Yes               | Yes                 | Yes                          | Yes                                        |
+@end
