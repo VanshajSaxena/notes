@@ -12,8 +12,8 @@
 ** ( ) Java Basics
 ** ( ) Primitive types vs Wrapper classes
 ** ( ) Strings & String Pool (what is and how does it work)
-** ( ) Immutable vs Mutable objects
-** ( ) Static keyword (fields, methods, blocks)
+** (x) [Immutable vs Mutable objects]{:./core-java/immutable-mutable-objects:}
+** (x) Static keyword (fields, methods, blocks)
 ** (x) [Access Modifiers]{:./core-java/access-modifiers:}
 ** (x) [final keyword (class, method, variable)]{:./core-java/final-keyword:}
 ** (x) [Enums & Usage]{:./core-java/enums-and-usage:}
