@@ -1,0 +1,75 @@
+* Equals and HashCode Contrast
+
+** The `equals()` Contract
+
+   The `equals()` method defines what it means for two objects to be "equal" based
+   on their *state* or *value*, rather than just their memory addresses (which
+   is the default behavior of `==`). When overriding `equals()`, you must
+   adhere to the following properties:
+
+   - *Reflexive*: For any non-null reference value `x`, `x.equals(x)` must return
+     `true`. An object must be equal to itself.
+   - *Symmetric*: For any non-null reference values `x` and `y`, `x.equals(y)` must
+     return `true` if and only if `y.equals(x)` returns `true`. If `x` considers
+     `y` equal, `y` must also consider `x` equal.
+   - *Transitive*: For any non-null reference values `x`, `y`, and `z`, if
+     `x.equals(y)` returns `true` and `y.equals(z)` returns `true`, then
+     `x.equals(z)` must return `true`. If `x` equals `y` and `y` equals `z`, then
+     `x` must equal `z`.
+   - *Consistent*: For any non-null reference values `x` and `y`, multiple
+     invocations of `x.equals(y)` must consistently return `true` or consistently
+     return `false`, provided no information used in `equals` comparisons on the
+     objects is modified. The result of `equals()` should not change unless a
+     relevant property of the object changes.
+   - *Nullity*: For any non-null reference value `x`, `x.equals(null)` must return
+     `false`. An object can never be equal to `null`.
+
+** The `hashCode()` Contract
+
+   The `hashCode()` method returns an integer hash code value for an object. This
+   hash code is primarily used by hash-based collections to efficiently store
+   and retrieve objects. The contract for `hashCode()` is as follows:
+
+   - *Consistency*: Whenever it is invoked on the same object more than once during
+     an execution of a Java application, the `hashCode()` method must consistently
+     return the same integer, provided no information used in `equals` comparisons
+     on the object is modified. This integer need not remain consistent from one
+     execution of an application to another execution of the same application.
+   - *`equals()` Consistency*: If two objects are equal according to the
+     `equals(Object)` method, then calling the `hashCode()` method on each of the
+     two objects must produce the same integer result. This is the most critical
+     part of the contract and the reason why you must override `hashCode()` when
+     you override `equals()`.
+   - *Unequal Objects (Recommendation)*: It is *not required* that if two objects
+     are unequal according to the `equals(Object)` method, then calling the
+     `hashCode()` method on each of the two objects must produce distinct integer
+     results. However, the programmer should be aware that producing distinct
+     integer results for unequal objects may improve the performance of hash
+     tables. (This means hash collisions are allowed, but minimizing them is good
+     for performance).
+
+** Why the Contract Matters (Especially for Collections)
+
+   Violating this contract, particularly the second rule of the `hashCode()`
+   contract, can lead to serious and hard-to-debug issues when using objects in
+   hash-based collections:
+
+   - *`HashMap` and `HashSet` Behavior*: When you add an object to a `HashMap` or
+     `HashSet`, the collection first uses the object's `hashCode()` to
+     determine which "bucket" or "slot" to put it in. If two objects are
+     `equals()` but have different `hashCode()` values, they might be stored in
+     different buckets. When you later try to retrieve an "equal" object using
+     `get()` or `contains()`, the collection will calculate its hash code, go
+     to the corresponding bucket, and then use `equals()` to find the exact
+     match within that bucket. If the `hashCode()` values are different, the
+     collection will look in the wrong bucket and won't find the object, even
+     though an "equal" object exists in the collection.
+   - *Loss of Uniqueness*: In `HashSet`, if you add two objects that are
+     `equals()` but have different hash codes, both might be added to the set,
+     violating the principle of a set containing only unique elements.
+   - *Performance Degradation*: If `hashCode()` consistently returns the same
+     value for many unequal objects (many collisions), hash-based collections
+     effectively degrade into linked lists, drastically reducing performance
+     from O(1) average time complexity to O(n) in the worst case for operations
+     like `get` and `put`.
+
