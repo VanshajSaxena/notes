@@ -1,0 +1,48 @@
+* Enums and Usage
+
+  Key Characteristics of Enums in Java:
+
+  - *Fixed Set of Constants*: An enum defines a collection of constant values.
+    For example, days of the week, months of the year, cardinal directions, or
+    states in a process.
+  - *Type Safety*: Unlike `int` constants, enums provide compile-time type
+    safety. If you declare a variable of an enum type, it can only hold one of
+    the values defined within that enum. This prevents errors from assigning
+    invalid values.
+  - *More Than Just Constants*: Java enums are much more powerful than simple
+    constant groups. They are implicitly special types of classes that can have:
+  -- *Constructors*: To initialize fields for each enum constant. Enum
+     constructors must be `private` or `package-private`.
+  -- *Fields (instance variables)*: To store data associated with each enum
+     constant.
+  -- *Methods*: To define behavior specific to each enum constant or for the enum
+     type as a whole.
+  -- *Implement Interfaces*: Enums can implement interfaces, allowing for
+     polymorphic behavior.
+  - *Implicitly extends `java.lang.Enum`*: All enums implicitly extend the
+    `java.lang.Enum` class. This means they cannot extend any other class, but
+    they can implement interfaces.
+  - *`public static final` constants*: Each enum constant is implicitly `public
+  static final`.
+  - *`==` for Comparison*: Because enum constants are single instances, you can
+    safely compare them using the `==` operator for equality checks.
+  - *Useful Predefined Methods*: Enums come with several built-in methods:
+  -- *`name()`*: Returns the name of the enum constant as a `String`.
+  -- *`ordinal()`*: Returns the zero-based position of the enum constant in its
+     declaration order.
+  -- *`valueOf(String name)`*: Returns the enum constant with the specified name.
+     Throws `IllegalArgumentException` if no such constant exists.
+  -- *`values()`*: A static method that returns an array containing all the enum
+     constants in their declaration order. This is useful for iterating over enum
+     constants.
+  -- *`toString()`*: By default, returns the name of the enum constant. Can be
+     overridden.
+  - *Usage in `switch` statements*: Enums work very well with `switch`
+    statements, making code cleaner and more readable.
+
+  @code java
+  // This is conceptual, you don't write this
+  public class Day extends java.lang.Enum<Day> {
+    // ... enum constants and their implementation
+  }
+  @end

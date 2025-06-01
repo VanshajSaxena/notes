@@ -16,7 +16,7 @@
 ** ( ) Static keyword (fields, methods, blocks)
 ** ( ) Access Modifiers
 ** ( ) final keyword (class, method, variable)
-** ( ) Enums & Usage
+** (x) [Enums & Usage]{:./core-java/enums-and-usage:}
 ** (x) [equals() and hashCode() contract]{:./core-java/equals-hashcode.norg:}
 ** (x) [Important Java 8 / 11 Features]{:./core-java/java-8-11-featues:}
 
