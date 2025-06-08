@@ -37,9 +37,9 @@
      execution of an application to another execution of the same application.
    - *`equals()` Consistency*: If two objects are equal according to the
      `equals(Object)` method, then calling the `hashCode()` method on each of the
-     two objects must produce the same integer result. This is the most critical
+     two objects must produce the same integer result. *This is the most critical
      part of the contract and the reason why you must override `hashCode()` when
-     you override `equals()`.
+     you override `equals()`*.
    - *Unequal Objects (Recommendation)*: It is *not required* that if two objects
      are unequal according to the `equals(Object)` method, then calling the
      `hashCode()` method on each of the two objects must produce distinct integer

@@ -1,0 +1,78 @@
+* Immutable vs Mutable Objects
+
+** Mutable Objects
+
+   A mutable object is an object whose state (the values of its fields) can be
+   modified after it has been instantiated. This means you can change the data
+   held within the object without creating a new object in memory.
+
+   Characteristics of Mutable Objects:
+
+   - *Changeable State*: You can use "setter" methods or directly access and
+     modify public fields to alter the object's data.
+   - *In-Place Modification*: Changes are made directly to the existing object
+     in memory.
+   - *Flexibility*: They offer flexibility because you can update their state
+     dynamically.
+   - *Memory Efficiency (sometimes)*: Since you don't need to create a new
+     object for every change, they can be more memory-efficient for frequent
+     modifications to a single object.
+   - *Not Inherently Thread-Safe*: In a multi-threaded environment, if multiple
+     threads access and modify a mutable object concurrently without proper
+     synchronization, it can lead to data corruption, race conditions, and
+     unpredictable behavior. You need to implement external synchronization
+     mechanisms (like `synchronized` blocks, `ReentrantLock`, etc.) to ensure
+     thread safety.
+
+** Immutable Objects
+
+   An immutable object is an object whose state cannot be changed after it has
+   been created and initialized. Once an immutable object is constructed, its
+   values remain constant throughout its lifetime. Any operation that appears
+   to modify an immutable object actually results in the creation of a *new*
+   immutable object with the desired changes, leaving the original object
+   untouched.
+
+   Characteristics of Immutable Objects:
+
+   - *Unchangeable State*: Once created, its internal state cannot be altered.
+   - *New Object on Modification*: Any operation that seems to "modify" the
+     object will return a new object with the modified state.
+   - *Inherently Thread-Safe*: Since their state never changes, there's no risk
+     of data corruption from multiple threads accessing them concurrently. This
+     eliminates the need for explicit synchronization.
+   - *Predictability and Readability*: Their constant state makes code easier
+     to reason about, as you don't have to worry about an object's state
+     changing unexpectedly.
+   - *Suitable for Caching*: Because their hash code (if properly implemented)
+     won't change, they are excellent candidates for keys in hash-based
+     collections (`HashMap`, `HashSet`).
+   - *Security*: Immutable objects cannot be tampered with, ensuring data
+     integrity.
+
+   To make a class truly immutable, you generally follow these rules:
+
+   ~ *Declare the class as `final`*: This prevents other classes from
+     extending it and potentially introducing mutable behavior.
+   ~ *Make all fields `private` and `final`*: `private` restricts direct
+     access, and `final` ensures that the fields can only be assigned once
+     (usually in the constructor).
+   ~ *Don't provide any setter methods*: There should be no public methods
+     that can modify the internal state of the object.
+   ~ *Initialize all fields via a constructor*: All fields should be
+     initialized in the constructor.
+   ~ *Perform "deep copy" for mutable fields*: If the class holds references
+     to other mutable objects (like arrays or `ArrayLists`), you must create a
+     defensive copy of those objects in the constructor and return defensive
+     copies in the getter methods. This prevents external code from modifying
+     the internal mutable objects directly.
+
+   > *Shallow Copy*: Only the top-level structure is copied. If the original
+   > object contains references to other objects, those references are copied,
+   > but the referred-to objects themselves are not copied.
+
+   > *Deep Copy*: A new object is created, and all its fields are copied. If
+   > any of the fields are references to other objects, those objects are also
+   > copied recursively. This ensures that the new object is completely
+   > independent of the original.
+
