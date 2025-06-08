@@ -1,0 +1,90 @@
+* Java Thread Lifecycle
+
+** Thread States
+
+   Thread in Java can be in different states, these states are defined by
+   `java.lang.Thread.State`. These are:
+
+   - {# NEW}
+   - {# RUNNABLE}
+   - {# BLOCKED}
+   - {# WAITING}
+   - {# TIMED_WAITING}
+   - {# TERMINATED}
+
+   @code java
+   // $ javap java.lang.Thread.State
+   public final class java.lang.Thread$State extends java.lang.Enum<java.lang.Thread$State> {
+     public static final java.lang.Thread$State NEW;
+     public static final java.lang.Thread$State RUNNABLE;
+     public static final java.lang.Thread$State BLOCKED;
+     public static final java.lang.Thread$State WAITING;
+     public static final java.lang.Thread$State TIMED_WAITING;
+     public static final java.lang.Thread$State TERMINATED;
+     public static java.lang.Thread$State[] values();
+     public static java.lang.Thread$State valueOf(java.lang.String);
+     static {};
+   }
+   @end
+
+*** NEW
+
+    A thread is in this state when a new thread is created with `new Thread()`
+    constructor, and the `start()` method isn't called yet.
+    It is essentially an empty thread object.
+
+*** RUNNABLE
+
+    When the `Thread.start()` method is called on a thread object, the thread
+    enters into this state. The thread doesn't necessarily execute in this
+    state but is ready to run when the `run()` method is called. The thread
+    scheduler determines which runnable thread gets to run.
+
+*** BLOCKED
+
+    A thread is in `BLOCKED` state when it is waiting for a *monitor lock* to
+    enter a synchronized block or method, or to re-enter a synchronized
+    block/method after calling `Object.wait()`.
+
+    This is *involuntary waiting* from the perspective of the blocked thread's
+    code. The thread wants to proceed but is prevented by the system because
+    the required lock is unavailable.
+
+    The thread is temporarily inactive, waiting for a resource that is
+    currently held by another thread. Once the lock becomes available, the
+    thread moves back to the `RUNNABLE` state.
+
+*** WAITING
+
+    A thread enters the `WAITING` state when it calls one of the
+    `Object.wait()` methods (without a timeout), `Thread.join()` (without a
+    timeout), or `LockSupport.park()`.
+
+    This is *voluntary wait*. The itself decided to wait for a condition to be
+    met by another thread, relinquishing its control.
+
+    The thread is waiting indefinitely for another thread to perform a specific
+    action (e.g. calling `notify()` or `notifyAll()` on the object it's waiting
+    on, or the joined thread to complete). It will remain in this state until
+    it receives a notification.
+
+*** TIMED_WAITING
+
+    Just as `WAITING` but with a specified waiting time. A thread enters this
+    state when it calls `Thread.sleep()`, `Object.wait()` with a timeout,
+    `Thread.join()` with a timeout, `LockSupport.parkNanos()` or
+    `LockSupport.parkUntil()`.
+
+    This is too *voluntary wait*.
+
+    The thread waits for a specific duration or until it receives a
+    notification, whichever comes first. After the timeout, it moves back to
+    `RUNNABLE`.
+
+*** TERMINATED
+
+    A thread enters the `TERMINATED` state when it completes the `run()` method
+    execution or when an unhandled exception propogates out or the `run()`
+    method.
+
+    The thread is no longer alive, it cannot be restarted.
