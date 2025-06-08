@@ -38,7 +38,7 @@
 * ( ) Java Concurrency (Multithreading) 🔴
 
 ** (x) [Thread Lifecycle]{:./java-concurrency/thread-lifecycle:}
-** ( ) Thread vs Runnable (which one is preferred to be used)
+** (x) [Thread vs Runnable (which one is preferred to be used)]{:./java-concurrency/thread-vs-runnable:}
 ** ( ) synchronized keyword & Locks
 ** ( ) Executors & Thread Pools
 ** ( ) Deadlock, Livelock, Starvation

@@ -1,0 +1,43 @@
+* Thread vs Runnable
+
+  There are basically two ways to create a thread in Java.
+
+  ~ Extend the `Thread` class and override the `run()` method.
+  ~ Implement the `Runnable` interface and pass that to the `Thread()`
+    constructor.
+
+  *Implementing `Runnable` is generally preferred over extending the `Thread`
+  class.* This is because of a number of reasons:
+
+  - Extending `Thread` class introduces lower flexibility, as Java only
+    supports *single inheritance*, i.e. you cannot extend other classes if you
+    choose to extend `Thread`.
+  - Choosing to implement `Runnable` *separates the concerns* of what is a
+    "task" and what is a "thread/worker". As `Runnable` represents a "task" and
+    `Thread` represents a "worker".
+  - Extending `Thread` will mean, each `Thread` instance has its own separate
+    `run()` method. If running the same task on multiple threads, this will
+    need creating multiple instances of the same `Thread`-extending class, each
+    with its own state. With `Runnable`, a *single instance* of `Runnable` can
+    be created and *passed to multiple instances* of `Thread` objects.
+  - `Runnable` is more compatible with `java.util.concurrent` interface. Which
+    is *modern and recommended* way to manage concurrent programming tasks.
+  - `Runnable` is a `FunctionalInterface` which makes it possible to create
+    instances of `Runnable` with *Lambda Expressions* (more concise and
+    readable).
+
+  @code java
+  // Java Thread
+  public class Thread implements Runnable {
+    public void run() {
+    }
+  @end
+
+  @code java
+  // Java Runnable
+  @FunctionalInterface
+  public interface Runnable {
+    void run();
+  }
+  @end
+
