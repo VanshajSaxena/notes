@@ -2,6 +2,6 @@
 
 ** Index
 
-   ~ {:./spring-security-architecture-principles-by-daniel-garnier.norg:}[Spring Security Architecture Principles by Daniel Garnier]
-   ~ {:./explain-it-to-me-like-i'm-5-oauth2-and-openid.norg:}[Explain it to Me Like I'm 5: OAuth2 and OpenID]
-   ~ {:./oauth2-openid-sso-under-the-hood-by-daniel-garnier.norg:}[OAuth2, OpenID: SSO under the hood - Daniel Garnier]
+   ~ {:./spring-security-architecture-principles-by-daniel-garnier:}[Spring Security Architecture Principles by Daniel Garnier]
+   ~ {:./explain-it-to-me-like-i'm-5-oauth2-and-openid:}[Explain it to Me Like I'm 5: OAuth2 and OpenID]
+   ~ {:./oauth2-openid-sso-under-the-hood-by-daniel-garnier:}[OAuth2, OpenID: SSO under the hood - Daniel Garnier]
