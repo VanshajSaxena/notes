@@ -1,3 +1,130 @@
 * [Performance Oriented Spring Data JPA & Hibernate]{https://www.youtube.com/watch?v=exqfB1WaqIw&list=WL&index=10&t=166s}
 
+** Why so slow?
 
+   - Poor *database connection* management
+   - Too many queries
+   - Slow queries
+   - Wrong JPA mappings
+   - Fetching more than needed
+
+** Database Connection Management
+
+   @code markdown
+   ```mermaid
+   sequenceDiagram
+      participant Application
+      participant DataSource
+      participant JDBC_Driver as JDBC Driver
+      participant Database
+
+      Application->>DataSource: get connection
+      DataSource->>JDBC_Driver: get connection
+      JDBC_Driver->>Database: get connection (network)
+      Database-->>JDBC_Driver: connection
+      JDBC_Driver-->>DataSource: connection
+      DataSource-->>Application: connection
+   ```
+   @end
+
+   - Each *new connection* sparks a *new OS process.*
+   - Consumes *5-10MB of RAM.*
+   - *CPU context switching.*
+
+*** Connection Pooling
+
+    - On application startup, creates a pool of physical connections.
+    - Reuses already open connections.
+    - Creates more connections, when pool is exhausted.
+
+   @code markdown
+   ```mermaid
+   sequenceDiagram
+      participant Application
+      participant DataSource
+      participant Connection_Pool as Connection Pool
+
+      Application->>DataSource: get connection
+      DataSource->>Connection_Pool: acquire connection
+      Connection_Pool-->>DataSource: connection
+      DataSource-->>Application: connection
+   ```
+   @end
+
+*** How big is your pool? (should be)
+
+    - Tomcat handles requests with *200* threads (default).
+    - HikariCP (Hikari Connection Pool) default pool size is *10*.
+
+    If you have 10,000 front-end users, having a connection pool of 10,000
+    would be shear insanity. 1000 still horrible. Even 100 connections,
+    overkill.
+
+    *You want a small pool of a few dozen connections at most*, and you want
+    the rest of the application threads blocked on the pool awaiting
+    connections.
+
+    {https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing}
+
+
+*** When is connection *acquired*? & When is connection *released*?
+
+    - Use `TransactionTemplate` from spring boot to programmatically enable
+      Transactions during database calls.
+
+** Summary
+
+   - Avoid select on insert with *`@Version`* or implement *`Persistable`*.
+   - Use *`Repository#getReferenceById`* when you need references.
+   - Always use *`FetchType.LAZY`* on *`@ManyToOne`*, *`@ManyToMany`*.
+   - Explicitly fetch associations with *fetch join* or *`@EntitiyGraph`*.
+   - Use *`@DynamicUpdate`* for table with large number of columns.
+
+** Tools
+
+   - Hypersistence Optimizer
+   - quick-perf
+
+** Entities - goods and bads
+
+   - Fetching more data than needed (even with LAZY fetch types) 😢
+   - Loaded entities are stored in JPA Persistence Context - memory 🥺
+   - Dirty Tracking - CPU 😡
+   - The risk of N+1 - Database 😱
+   - *Handles business logic and enforces invariants.*
+
+   > Fetch *entity* with an intention to modify it.
+
+   > Fetch *projections* for reading.
+
+   @code java
+   // Projection Class
+   record NamesOnly(String id, String firstName, String lastName) {}
+
+   // Repository
+   public interface AccountRepository extends JpaRepository<Account, String> {
+     NamesOnly findNamesOnlyById(String id);
+   }
+
+   // Columns to select
+   //  
+   NamesOnly findNamesOnlyById(String id);
+   //                      
+   //                 where clause
+
+   // Dynamic Projections
+   public interface AccountRepository extends JpaRepository<Account, String> {
+     <T> T findById(String id, Class<T> clazz);  // 😎 (no custom query allowed 🥴)
+   }
+   @end
+
+   > Just use *SQL*
+
+** Takeaways
+
+   - JPA Hibernate are *NOT* easy.
+   - Get connections management right.
+   - Log queries during development.
+   - Consider getting Hibernate Optimizer from Vlad or using QuickPerf for
+     testing.
+   - Use projections for reading data.
