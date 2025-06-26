@@ -3,7 +3,7 @@
 
 * ( ) Core Java Fundamentals 🟢
 
-** ( ) [All Java Keywords]{:./core-java/all-java-keywords:}
+** (x) [All Java Keywords]{:./core-java/all-java-keywords:}
 ** ( ) Object-Oriented Programming (OOP)
 ** ( ) Encapsulation – Private fields, getters, setters
 ** ( ) Inheritance – Superclass, subclass, extends
