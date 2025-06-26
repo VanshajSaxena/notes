@@ -62,7 +62,7 @@
 ** ( ) Builder Pattern
 ** ( ) Strategy Pattern
 ** ( ) Observer Pattern
-** ( ) Useful link: https://refactoring.guru/design-patterns
+** ( ) Useful link: {https://refactoring.guru/design-patterns}
 
 * ( ) Java Memory Model 🔴
 
@@ -79,7 +79,7 @@
 ** ( ) Inversion of Control (IoC) & Dependency Injection (types of DI)
 ** ( ) IoC container, IoC Container Implementation in Spring
 ** ( ) ApplicationContext vs. BeanFactory
-** ( ) Stereotype annotations `(@Component,` `@Service` , `@Repository` , `@Controller)`
+** ( ) Stereotype annotations `(@Component`, `@Service`, `@Repository`, `@Controller)`
 ** ( ) Bean (declaration, usage)
 ** ( ) Bean Scopes (singleton, prototype, request, session)
 ** ( ) `@Autowired` on Field vs. Constructor Injection
@@ -146,7 +146,7 @@
 ** ( ) What is JWT Secret? 🔴
 ** ( ) How to implement JWT Authentication in Spring 🔴
 ** ( ) Security Filters (`OncePerRequestFilter`)
-**   ( ) Role-Based Access Control (`@PreAuthorize`, `@Secured`)
+** ( ) Role-Based Access Control (`@PreAuthorize`, `@Secured`)
 
 * ( ) Database & JPA/Hibernate 🟢
 
@@ -154,7 +154,7 @@
 ** ( ) ORM Implementation - Hibernate
 ** ( ) JPA vs Hibernate
 ** ( ) What is Entity?
-** ( ) `@Entity` , `@Table` , `@Column` , `@Id` , `@GeneratedValue`
+** ( ) `@Entity`, `@Table`, `@Column`, `@Id`, `@GeneratedValue`
 ** ( ) Entity Relationships (`@OneToOne`, `@OneToMany`, `@ManyToMany`)
 ** ( ) Cascade Types & Fetch Types
 ** ( ) ACID
@@ -169,7 +169,7 @@
 ** ( ) AOP Core concepts (Aspect, Advice, Pointcut)
 ** ( ) Proxy Mechanisms (JDK Dynamic Proxies vs CGLIB Proxies)
 ** ( ) Performance Impact of AOP
-** ( ) `@Before` , `@After` , `@Around` and other useful annotations
+** ( ) `@Before`, `@After`, `@Around` and other useful annotations
 
 * ( ) Microservices & Cloud 🔴
 
