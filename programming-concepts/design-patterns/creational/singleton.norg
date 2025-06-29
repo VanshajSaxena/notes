@@ -111,7 +111,7 @@
     }
     @end
 
-    This is one of the most simple and inherently thread-safe with needing
+    This is one of the most simple and inherently thread-safe without needing
     explicit synchronization. The instance is created when the class is loaded.
     Thus, it is not the most resource efficient way, if the singleton is never
     used in the application.
@@ -179,5 +179,5 @@
     @end
 
     The static block is executed when the class is loaded by the JVM. If any
-    Exception is occurs, a `RuntimeException` can be thrown. It is thread-safe
-    but not lazy-loaded.
+    Exception occurs, a `RuntimeException` can be thrown. It is thread-safe but
+    not lazy-loaded.
