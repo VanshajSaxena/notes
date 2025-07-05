@@ -1,0 +1,255 @@
+* [Core Design Principles For Software Developers By Venkat Subramaniam]{https://youtu.be/llGgO74uXMI?si=09mRFjcyYwCW8n-S}
+
+** What is (considered) a good design
+
+   /"A design is good if the cost of changing a design is minimal."/ - Venkat
+
+   then continues about how this is not a good definition.
+
+   /"Almost impossible to get it right the first time."/ - Venkat
+
+   /"Any software that is relevant has to change."/ - Venkat
+
+** How to create a good design.
+
+   /"Take time to review design and code."/
+
+*** KISS Principle - Keep It Simple, Stupid!
+
+    /"*Simple* keeps you focused."/
+    /"Simple solves only real problem we know about."/
+    /"Simple fails less."/
+    /"Simple is easier to understand."/
+
+    /"Simple is not necessarily familiar."/
+    /"A while-loop with four mutable variables is not simple but familiar."/
+
+    ---
+
+   /*"A good design is the one that hides inherent complexity and elemiantes the accidental complexity."*/
+
+*** YAGNIy Principle - You Aren't Gonna Need It (yet).
+
+    /"When should I implement something?"/
+
+    - How much do you know?
+    - Cost of implementing?
+
+    /"We are wiser tomorrow than we are today."/
+
+    @code markdown
+    | Now   | Comparator |  Later | Decision |
+    | :---- | :--------- | :----- | :-------|
+    | $N    | >      | $L     | postpone    |
+    | $N    | ==     | $L     | postpone    |
+    | $N    | <      | $L     | Ask How Probable? High - Do it, Low - postpone|
+
+    $N - cost of doing it now
+    $P - cost of doing it later
+    @end
+
+    /"If you want to postpone you need to have good automated testing."/
+
+*** Cohesion
+
+    - Narrow
+    - Focused
+    - Does One thing and One Thing Well
+
+    /"We want software to change, but not too expensive to change."/
+
+    If a code is Cohesive, it has to change less frequently.
+
+*** Coupling
+
+    /"What you depend on."/
+
+    Worst form of coupling - Inheritance (for Java based Inheritance)
+
+    /"knock out before you mock out"/ (In reference to automated tests being coupled with existing code.)
+
+    ~ Get rid of it.
+    ~ Make it loose instead of tight
+
+    Depending on a class is tight coupling.
+    Depending on an interface is loose coupling.
+
+    Use caution.
+
+    /*"A good design has high cohesion and low coupling.*/"
+
+*** DRY - Don't Repeat Yourself
+
+    /"Don't duplicate code and effort."/
+
+    > Every piece of knowledge in a system should have a single unambiguous authoritative representation.
+
+    /"It reduces the cost of development."/
+
+    /"The future you will thank you."/
+
+*** Single Responsibility Principle
+
+    Long methods are bad:
+
+    - Hard to test
+    - Hard to read
+    - Hard to remember
+    - Hard to reuse
+    - Obscured business rules
+    - Leads to duplication
+    - Many reasons to change
+    - Can't be optimised (by anything)
+    - Lot of variables
+    - Mixed Levels
+    - Low cohesion - orthogonal to good design
+    - High coupling - orthogonal to good design
+    - Hard to debug
+
+    How long is long method?
+
+    SLAP - *Single Level of Abstraction*
+
+    /"Don't comment what, instead comment why."/
+
+    /"Good code is like a JOKE."/ - You shouldn't have to explain the code (if it needs explanation, it needs refactoring.).
+
+    Compose Method Pattern
+
+*** Open-Closed Principle
+
+    > A Software module should be open for extension but closed from modification.
+
+    Abstraction and polymorphism are the key to make this happen.
+
+    Two Options:
+
+    ~ Change the existing code
+    ~ Add a small new module of code
+
+    @code java
+    class Engine {
+      public Engine(){}
+      // public Engine(Engine engine) {}
+      protected Engine(Engine engine) {}
+      public Engine copy() {
+        // use reflection here to make a copy.
+        return new Engine(this);
+      }
+      public String toString() {
+        return getClass().getName() + ":" + hashCode();
+      }
+    }
+
+    class TurboEngine extends Engine {
+      public TurboEngine() {
+        super();
+      }
+      public TurboEngine(TurboEngine other) {
+        super(other);
+      }
+    }
+
+    class Car {
+      private int year;
+      private Engine engine;
+      public Car(int year, Engine engine) {
+        this.year = year;
+        this.engine = engine;
+      }
+      public Car(Car other) {
+        this.year = other.year;
+        // this.engine = new Engine(other.engine);
+        this.engine = other.engine.copy();
+      }
+      public String toString() {
+        return year + " - " + engine;
+      }
+    }
+
+    public class Main {
+      public static void main(String[] args) {
+        Car car1 = new Car(1999, new TurboEngine()); // The problem starts here.
+        System.out.println(car1);
+
+        Car car2 = new Car(car1);
+        System.out.println(car2);
+      }
+    }
+    @end
+
+    /"We need to know software and domain."/
+
+    There are three kinds of people we work with:
+
+    ~ Knows domain really well, knows no software.
+    ~ Knows software really well, knows no domain.
+    ~ Knows domain really well, and knows software really well.
+
+*** Liskov's Substitution Principle
+
+    Inheritance should be used only for substitutability.
+
+    If an object of B should be used anywhere an object of A is used, then use inheritance.
+
+    If an object of B should use an object of A, then use composition/delegation.
+
+    Inheritance demands more from a developer than composition or delegation does.
+
+    Services of the derived class should require no more and promise no less than the corresponding services of the base class.
+
+    Why?
+
+    The user of a base class should be able to use an instance of a derived class without knowing the difference.
+
+    Good
+    `public` vs `protected` in base vs. derived
+    Derived functions can't throw any new checked exception not thrown by the base (unless the new exception extends the old one.)
+    Collection of derived does not extend from collection of base.
+
+    Bad
+    `java.util.Stack<T> extends java.util.Vector<T>`
+
+    /"Use composition or delegation instead of inheritance unless you want substitutability."/
+
+
+*** Dependency Injection Principle
+
+    > A class should not depend on another class, they both have to depend on an abstraction (interface).
+
+    Use caution.
+
+    Instead of using concrete classes complying an interface, Lambda expressions can be used by creating FunctionalInterfaces.
+
+*** Interface Segregation Principle
+
+    @code
+    // Violation of ISP
+    Class
+      get time
+      set time
+      get alarm
+      set alarm
+      get radio
+      set radio
+
+    // ISP
+    class Clock implements TimePiece, Alarm, Radio {}
+
+    Now the user can:
+
+    User1: ask TimePiece and use Clock
+    User2: ask Alarm and use Clock
+    User3: ask Radio and use Clock
+    @end
+
+    ===
+
+DRY
+YAGNI
+
+- SRP - Single Responsibility Principle
+- OCP - Open-Closed Principle
+- LSP - Liskov Substitution Principle
+- ISP - Interface Segregation Principle
+- DIP - Dependency Inversion Principle
