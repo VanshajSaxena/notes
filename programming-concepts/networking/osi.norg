@@ -2,10 +2,14 @@
 
 ** Layers
 
-*** Layer 1 Physical
-*** Layer 2 Data Link
-*** Layer 3 Network
-*** Layer 4 Transport
-*** Layer 5 Session
-*** Layer 6 Presentation
-*** Layer 7 Application
+@code markdown
+| OSI Model (7 Layers)          | TCP/IP Model (5 Layers - more detailed) | Data Type (PDU) at this layer in OSI | Data Type (PDU) in your image (TCP/IP) |
+| :---------------------------- | :------------------------------------- | :----------------------------------- | :--------------------------------------- |
+| **7. Application Layer** | **5. Application Layer** | Data                                 | Data                                     |
+| **6. Presentation Layer** |                                        | Data                                 |                                          |
+| **5. Session Layer** |                                        | Data                                 |                                          |
+| **4. Transport Layer** | **4. Transport Layer** | Segment (TCP), Datagram (UDP)        | Segment (TCP Header + Data)              |
+| **3. Network Layer** | **3. Internet Layer** | Packet                               | Packet (IP Header + TCP Header + Data)   |
+| **2. Data Link Layer** | **2. Data Link Layer** | Frame                                | Frame (Frame Header + IP Header + TCP Header + Data + Frame Footer) |
+| **1. Physical Layer** | **1. Physical Layer** | Bits                                 | (Implicitly handled as raw bits on the wire) |
+@end
